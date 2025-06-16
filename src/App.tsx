@@ -36,6 +36,39 @@ function App() {
         <header ref={headerRef} className={s.header}>
           <h1 className={s.headerTitle}>Рецепти</h1>
         </header>
+
+        {/* Search Section */}
+        <section className={s.searchSection}>
+          <input
+            type="text"
+            placeholder="Шукати рецепт..."
+            className={s.searchInput}
+          />
+        </section>
+
+        {/* Categories Section */}
+        <section className={s.categoriesSection}>
+          <h2 className={s.sectionTitle}>Категорії</h2>
+          <ul className={s.categoriesList}>
+            <li className={s.categoryItem}>Сніданок</li>
+            <li className={s.categoryItem}>Обід</li>
+            <li className={s.categoryItem}>Вечеря</li>
+            <li className={s.categoryItem}>Десерти</li>
+          </ul>
+        </section>
+
+        {/* Recipe List Section */}
+        <section className={s.recipesSection}>
+          <h2 className={s.sectionTitle}>Рецепти</h2>
+          <div className={s.recipesGrid}>{/* List in here */}</div>
+        </section>
+
+        {/* Footer Section */}
+        <footer className={s.footer}>
+          <p>
+            © {new Date().getFullYear()} Смачні Рецепти. Всі права захищені.
+          </p>
+        </footer>
       </div>
     </>
   );
