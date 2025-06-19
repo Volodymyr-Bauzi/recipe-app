@@ -11,10 +11,18 @@ body {
   margin: 0 auto;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
   background: #fff5cc;
   color: #5d4037;
   display: flex;
+  border: 3px solid red;
+}
+
+.content {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 header {
@@ -94,11 +102,14 @@ header {
 }
 
 .footer {
+  margin-top: auto;
   padding: 20px;
   background: #ffcc80;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   box-shadow: 0 -4px 14px rgb(0 0 0 / 0.1);
   text-align: center;
+  width: 100vw;
 }
 
 @media screen and (max-width: 600px) {
