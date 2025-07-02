@@ -1,0 +1,76 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #444;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.submitButton {
+  padding: 0.6rem 1rem;
+  background: #5c67f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #3f48cc;
+}
+
+.toggleText {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.toggleLink {
+  color: #5c67f2;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.message {
+  font-size: 0.85rem;
+  color: red;
+  text-align: center;
+}
