@@ -42,29 +42,35 @@ const Header = () => {
 
   return (
     <header ref={headerRef} className={s.header}>
-      <h1 className={s.headerTitle}>Рецепти</h1>
-      <div className={s.authButtons}>
-        {user ? (
-          <div className={s.userInfo}>
-            <img
-              src={user.user_metadata.avatar_url || '/default-avatar.png'}
-              alt="User Avatar"
-              className={s.avatar}
-            />
-            <span className={s.userName}>
-              {user.user_metadata.full_name.split(' ')[0] || user.email}
-            </span>
-            <button className={s.logoutBtn} onClick={handleLogout}>
-              Вийти
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button onClick={() => setAuthOpen(true)} className={s.authButton}>
-              Увійти / Зареєструватися
-            </button>
-          </div>
-        )}
+      <div className={s.headerContent}>
+        <button className={s.addButton}>Добавити</button>
+        <h1 className={s.headerTitle}>Рецепти</h1>
+        <div className={s.authButtons}>
+          {user ? (
+            <div className={s.userInfo}>
+              <img
+                src={user.user_metadata.avatar_url || '/default-avatar.png'}
+                alt="User Avatar"
+                className={s.avatar}
+              />
+              <span className={s.userName}>
+                {user.user_metadata.full_name.split(' ')[0] || user.email}
+              </span>
+              <button className={s.logoutBtn} onClick={handleLogout}>
+                Вийти
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                onClick={() => setAuthOpen(true)}
+                className={s.authButton}
+              >
+                Увійти / Зареєструватися
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       {/* Modal */}
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
