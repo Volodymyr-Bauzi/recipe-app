@@ -4,10 +4,14 @@ import {supabase} from '../lib/supabaseClient';
 import AuthModal from './AuthModal';
 import s from './Header.module.css';
 
-const Header = () => {
+interface HeaderProps {
+  onAddRecipeClick: () => void;
+}
+
+const Header = ({onAddRecipeClick}: HeaderProps) => {
   const {user} = useSupabaseAuth();
 
-  const headerRef = useRef<HTMLTableCellElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
 
   useEffect(() => {
@@ -43,7 +47,14 @@ const Header = () => {
   return (
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
-        <button className={s.addButton}>Добавити</button>
+        <button
+          className={s.addButton}
+          onClick={onAddRecipeClick}
+          disabled={!user}
+          title={!user ? 'Увійдіть, щоб додати рецепт' : 'Додати новий рецепт'}
+        >
+          Добавити
+        </button>
         <h1 className={s.headerTitle}>Рецепти</h1>
         <div className={s.authButtons}>
           {user ? (
@@ -54,7 +65,7 @@ const Header = () => {
                 className={s.avatar}
               />
               <span className={s.userName}>
-                {user.user_metadata.full_name.split(' ')[0] || user.email}
+                {user.user_metadata.full_name?.split(' ')[0] || user.email}
               </span>
               <button className={s.logoutBtn} onClick={handleLogout}>
                 Вийти
@@ -72,9 +83,10 @@ const Header = () => {
           )}
         </div>
       </div>
-      {/* Modal */}
+      {/* Auth Modal */}
       {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
     </header>
   );
 };
+
 export default Header;
