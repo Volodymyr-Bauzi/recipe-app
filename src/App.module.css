@@ -78,13 +78,35 @@ body {
 }
 
 .recipesSection {
+  width: 100%;
   margin-bottom: 30px;
 }
 
 .recipesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.recipeCard {
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  padding: 16px;
+}
+.recipeCard:hover {
+  transform: translateY(-5px);
+}
+
+.recipeTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 16px;
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
