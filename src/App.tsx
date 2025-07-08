@@ -1,4 +1,3 @@
-import RecipeDetailWrapper from './components/RecipeDetailWrapper';
 import RecipeList from './components/RecipeList';
 import {
   BrowserRouter as Router,
@@ -6,13 +5,14 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import RecipePage from './components/RecipePage';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RecipeList />} />
-        <Route path="/recipe/:id" element={<RecipeDetailWrapper />} />
+        <Route path="/recipe/:id" element={<RecipePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

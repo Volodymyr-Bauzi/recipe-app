@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
 import {supabase} from '../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
-import styles from './AddRecipeModal.module.css';
+import styles from './RecipeModal.module.css';
 
-interface AddRecipeModalProps {
+interface RecipeModalProps {
   isOpen: boolean;
   onClose: () => void;
   user: User | null;
   onRecipeAdded?: () => void;
 }
 
-export function AddRecipeModal({
+export function RecipeModal({
   isOpen,
   onClose,
   user,
   onRecipeAdded,
-}: AddRecipeModalProps) {
+}: RecipeModalProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState('');
