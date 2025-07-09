@@ -61,3 +61,24 @@
 .instructionsList li {
   margin-bottom: 1rem;
 }
+.recipeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.editButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.editButton:hover {
+  background-color: #45a049;
+}

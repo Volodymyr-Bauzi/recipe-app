@@ -47,10 +47,14 @@ header {
 }
 
 .logoutBtn,
-.loginBtn {
-  background: transparent;
-  border: none;
-  color: #fff;
+.authButton {
+  background: #ffcc80;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
   font-weight: bold;
   cursor: pointer;
 }
@@ -62,6 +66,9 @@ header {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .addButton::before {

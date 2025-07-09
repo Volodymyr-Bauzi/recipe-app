@@ -4,14 +4,15 @@ import type {Recipe} from '../types';
 import styles from './RecipePage.module.css';
 import PageWrapper from './PageWrapper';
 import {supabase} from '../lib/supabaseClient';
-import {RecipeModal} from './RecipeModal'; // Import the renamed component
+import {RecipeModal} from './RecipeModal';
+import type {User} from '@supabase/supabase-js';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const {id} = useParams<{id: string}>();
 
   // These are dummy states just to satisfy PageWrapper props

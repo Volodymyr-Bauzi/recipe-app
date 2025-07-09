@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {supabase} from '../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
 import styles from './RecipeModal.module.css';
+import type {Recipe} from '../types';
 
 interface RecipeModalProps {
   isOpen: boolean;
   onClose: () => void;
   user: User | null;
   onRecipeAdded?: () => void;
+  onRecipeUpdated?: () => void;
+  recipeToEdit?: Recipe | null;
 }
 
 export function RecipeModal({
@@ -15,6 +18,8 @@ export function RecipeModal({
   onClose,
   user,
   onRecipeAdded,
+  onRecipeUpdated,
+  recipeToEdit,
 }: RecipeModalProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,11 +32,36 @@ export function RecipeModal({
 
   const categories = ['Сніданок', 'Обід', 'Вечеря', 'Десерти'];
 
+  // Determine if we're in edit mode
+  const isEditMode = !!recipeToEdit;
+
+  // Populate form when editing an existing recipe
+  useEffect(() => {
+    if (recipeToEdit) {
+      setTitle(recipeToEdit.title || '');
+      setDescription(recipeToEdit.description || '');
+      setIngredients(recipeToEdit.ingredients || '');
+      setInstructions(recipeToEdit.instructions || '');
+      setCookingTime(
+        recipeToEdit.cooking_time ? recipeToEdit.cooking_time.toString() : ''
+      );
+      setCategory(recipeToEdit.category || '');
+    } else {
+      // Reset form when not editing
+      setTitle('');
+      setDescription('');
+      setIngredients('');
+      setInstructions('');
+      setCookingTime('');
+      setCategory('');
+    }
+  }, [recipeToEdit]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!user) {
-      setError('You must be logged in to add a recipe');
+      setError('You must be logged in to manage recipes');
       return;
     }
 
@@ -48,40 +78,60 @@ export function RecipeModal({
         throw new Error('User session expired. Please log in again.');
       }
 
-      console.log('Current user ID:', currentUser.id);
+      const recipeData = {
+        title,
+        description,
+        ingredients,
+        instructions,
+        cooking_time: cookingTime ? parseInt(cookingTime) : null,
+        category,
+        user_id: currentUser.id,
+      };
 
-      // Insert the recipe into Supabase
-      const {error: insertError} = await supabase
-        .from('recipes')
-        .insert([
-          {
-            title,
-            description,
-            ingredients,
-            instructions,
-            cooking_time: cookingTime ? parseInt(cookingTime) : null,
-            category,
-            user_id: currentUser.id, // Use the current user ID from the session
-          },
-        ])
-        .select();
+      let error;
 
-      if (insertError) throw insertError;
+      if (isEditMode && recipeToEdit) {
+        // Update existing recipe
+        const {error: updateError} = await supabase
+          .from('recipes')
+          .update(recipeData)
+          .eq('id', recipeToEdit.id)
+          .select();
 
-      // Reset form
+        error = updateError;
+
+        if (!error && onRecipeUpdated) {
+          onRecipeUpdated();
+        }
+      } else {
+        // Insert new recipe
+        const {error: insertError} = await supabase
+          .from('recipes')
+          .insert([recipeData])
+          .select();
+
+        error = insertError;
+
+        if (!error && onRecipeAdded) {
+          onRecipeAdded();
+        }
+      }
+
+      if (error) throw error;
+
+      // Reset form and close modal
       setTitle('');
       setDescription('');
       setIngredients('');
       setInstructions('');
       setCookingTime('');
       setCategory('');
-
-      // Close modal and notify parent
       onClose();
-      if (onRecipeAdded) onRecipeAdded();
     } catch (err) {
-      console.error('Error adding recipe:', err);
-      setError('Failed to add recipe. Please try again.');
+      console.error(`Error ${isEditMode ? 'updating' : 'adding'} recipe:`, err);
+      setError(
+        `Failed to ${isEditMode ? 'update' : 'add'} recipe. Please try again.`
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -93,7 +143,7 @@ export function RecipeModal({
     <div className={styles.overlay}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <h2>Додати новий рецепт</h2>
+          <h2>{isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}</h2>
           <button
             className={styles.closeBtn}
             onClick={onClose}
@@ -199,7 +249,13 @@ export function RecipeModal({
               className={styles.submitBtn}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Додавання...' : 'Додати рецепт'}
+              {isSubmitting
+                ? isEditMode
+                  ? 'Оновлення...'
+                  : 'Додавання...'
+                : isEditMode
+                ? 'Оновити рецепт'
+                : 'Додати рецепт'}
             </button>
           </div>
         </form>
