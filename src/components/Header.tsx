@@ -48,6 +48,12 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
         <button
+          className={s.toggleNavBarButton}
+          onClick={() => console.log('Toggle sidebar')}
+        >
+          ☰
+        </button>
+        <button
           className={s.addButton}
           onClick={onAddRecipeClick}
           disabled={!user}
@@ -55,7 +61,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
         >
           Добавити
         </button>
-        <h1 className={s.headerTitle}>Рецепти</h1>
+        <h1 className={s.headerTitle}>Домашні Рецепти</h1>
         <div className={s.authButtons}>
           {user ? (
             <div className={s.userInfo}>

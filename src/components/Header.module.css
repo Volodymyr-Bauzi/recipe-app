@@ -47,28 +47,19 @@ header {
 }
 
 .logoutBtn,
-.authButton {
+.authButton,
+.addButton,
+.toggleNavBarButton {
   background: #ffcc80;
   border-radius: 6px;
   padding: 8px 15px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  color: white;
+  color: #555;
   font-weight: bold;
   cursor: pointer;
-}
-
-.addButton {
-  background: #ffcc80;
-  border-radius: 6px;
-  padding: 8px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+  border: 3px solid grey;
 }
 
 .addButton::before {
@@ -79,4 +70,32 @@ header {
 .addButton:hover {
   background: #ffb341;
   box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
+}
+
+.toggleNavBarButton {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .headerContent {
+    width: 100%;
+  }
+
+  .headerTitle {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .authContainer {
+    margin-top: 1rem;
+  }
+
+  .addButton,
+  .authButtons {
+    display: none;
+  }
+
+  .toggleNavBarButton {
+    display: block;
+  }
 }
