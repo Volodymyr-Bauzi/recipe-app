@@ -68,12 +68,8 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           <button
             className={s.addButton}
             onClick={user ? onAddRecipeClick : openAuthModal}
-            disabled={!user}
-            title={
-              !user ? 'Увійдіть, щоб додати рецепт' : 'Додати новий рецепт'
-            }
           >
-            Добавити
+            {!user ? 'Увійдіть, щоб додати рецепт' : 'Додати новий рецепт'}
           </button>
           <div className={s.authButtons}>
             {user ? (

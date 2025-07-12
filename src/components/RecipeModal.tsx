@@ -30,7 +30,16 @@ export function RecipeModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const categories = ['Сніданок', 'Обід', 'Вечеря', 'Десерти'];
+  const categories = [
+    'Десерти',
+    'Основні',
+    'Супи',
+    'Гарніри',
+    'Салати',
+    "М'ясне",
+    'Закрутки',
+    'Закуски',
+  ];
 
   // Determine if we're in edit mode
   const isEditMode = !!recipeToEdit;
