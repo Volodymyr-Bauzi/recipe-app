@@ -13,6 +13,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
 
   const headerRef = useRef<HTMLElement | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<boolean | null>(true);
 
   useEffect(() => {
     const scrollFunction = () => {
@@ -50,17 +51,16 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
         <div className={s.headerMain}>
           <div className={s.hamburgerMenu}>
             {/* Hamburger menu for mobile view */}
-            <input
+            <button
               className={s.toggleNavBarButton}
-              type="checkbox"
-              id="menuCheckbox"
-              onClick={() => console.log('Toggle sidebar')}
-            />
-            <button className={s.toggleNavBarButton}>☰</button>
+              onClick={() => setActiveMenu(!activeMenu)}
+            >
+              ☰
+            </button>
           </div>
           <h1 className={s.headerTitle}>Домашні Рецепти</h1>
         </div>
-        <div className={s.headerSecondary}>
+        <div className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}>
           <button
             className={s.addButton}
             onClick={onAddRecipeClick}
