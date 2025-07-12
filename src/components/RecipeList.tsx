@@ -41,7 +41,16 @@ const RecipeList = () => {
       <section className={s.categoriesSection}>
         <h2 className={s.sectionTitle}>Категорії</h2>
         <ul className={s.categoriesList}>
-          {['Сніданок', 'Обід', 'Вечеря', 'Десерти'].map((category) => (
+          {[
+            'Десерти',
+            'Основні',
+            'Супи',
+            'Гарніри',
+            'Салати',
+            "М'ясне",
+            'Закрутки',
+            'Закуски',
+          ].map((category) => (
             <li
               key={category}
               className={`${s.categoryItem} ${

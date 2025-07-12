@@ -45,6 +45,10 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
     }
   };
 
+  const openAuthModal = () => {
+    setAuthOpen(true);
+  };
+
   return (
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
@@ -63,7 +67,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
         <div className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}>
           <button
             className={s.addButton}
-            onClick={onAddRecipeClick}
+            onClick={user ? onAddRecipeClick : openAuthModal}
             disabled={!user}
             title={
               !user ? 'Увійдіть, щоб додати рецепт' : 'Додати новий рецепт'
@@ -88,10 +92,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
               </div>
             ) : (
               <div>
-                <button
-                  onClick={() => setAuthOpen(true)}
-                  className={s.authButton}
-                >
+                <button onClick={openAuthModal} className={s.authButton}>
                   Увійти / Зареєструватися
                 </button>
               </div>
