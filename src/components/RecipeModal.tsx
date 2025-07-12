@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {supabase} from '../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
-import styles from './RecipeModal.module.css';
 import type {Recipe} from '../types';
+import ModalWrapper from './ModalWrapper';
+import styles from './RecipeModal.module.css';
 
 interface RecipeModalProps {
   isOpen: boolean;
@@ -41,10 +42,8 @@ export function RecipeModal({
     'Закуски',
   ];
 
-  // Determine if we're in edit mode
   const isEditMode = !!recipeToEdit;
 
-  // Populate form when editing an existing recipe
   useEffect(() => {
     if (recipeToEdit) {
       setTitle(recipeToEdit.title || '');
@@ -56,7 +55,6 @@ export function RecipeModal({
       );
       setCategory(recipeToEdit.category || '');
     } else {
-      // Reset form when not editing
       setTitle('');
       setDescription('');
       setIngredients('');
@@ -78,7 +76,6 @@ export function RecipeModal({
     setError(null);
 
     try {
-      // Get the current authenticated user to ensure we have the latest session
       const {
         data: {user: currentUser},
       } = await supabase.auth.getUser();
@@ -100,7 +97,6 @@ export function RecipeModal({
       let error;
 
       if (isEditMode && recipeToEdit) {
-        // Update existing recipe
         const {error: updateError} = await supabase
           .from('recipes')
           .update(recipeData)
@@ -113,7 +109,6 @@ export function RecipeModal({
           onRecipeUpdated();
         }
       } else {
-        // Insert new recipe
         const {error: insertError} = await supabase
           .from('recipes')
           .insert([recipeData])
@@ -128,7 +123,7 @@ export function RecipeModal({
 
       if (error) throw error;
 
-      // Reset form and close modal
+      // Clear form and close modal
       setTitle('');
       setDescription('');
       setIngredients('');
@@ -149,126 +144,116 @@ export function RecipeModal({
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h2>{isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}</h2>
-          <button
-            className={styles.closeBtn}
-            onClick={onClose}
-            aria-label="Close"
-          >
-            &times;
-          </button>
+    <ModalWrapper
+      title={isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}
+      onClose={onClose}
+    >
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+
+        <div className={styles.formGroup}>
+          <label htmlFor="title">Назва рецепту</label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            placeholder="Введіть назву рецепту"
+          />
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {error && <div className={styles.errorMessage}>{error}</div>}
+        <div className={styles.formGroup}>
+          <label htmlFor="category">Категорія</label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+            className={styles.select}
+          >
+            <option value="">Виберіть категорію</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="title">Назва рецепту</label>
-            <input
-              id="title"
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              placeholder="Введіть назву рецепту"
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="description">Опис</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            placeholder="Короткий опис рецепту"
+            rows={3}
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="category">Категорія</label>
-            <select
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-              className={styles.select}
-            >
-              <option value="">Виберіть категорію</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="ingredients">Інгредієнти</label>
+          <textarea
+            id="ingredients"
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
+            required
+            placeholder="Введіть інгредієнти (по одному на рядок)"
+            rows={5}
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="description">Опис</label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              placeholder="Короткий опис рецепту"
-              rows={3}
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="instructions">Інструкції</label>
+          <textarea
+            id="instructions"
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            required
+            placeholder="Введіть інструкції з приготування"
+            rows={5}
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="ingredients">Інгредієнти</label>
-            <textarea
-              id="ingredients"
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-              required
-              placeholder="Введіть інгредієнти (по одному на рядок)"
-              rows={5}
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="cookingTime">Час приготування (хвилини)</label>
+          <input
+            id="cookingTime"
+            type="number"
+            value={cookingTime}
+            onChange={(e) => setCookingTime(e.target.value)}
+            required
+            min="1"
+            placeholder="Введіть час приготування в хвилинах"
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="instructions">Інструкції</label>
-            <textarea
-              id="instructions"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              required
-              placeholder="Введіть інструкції з приготування"
-              rows={5}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="cookingTime">Час приготування (хвилини)</label>
-            <input
-              id="cookingTime"
-              type="number"
-              value={cookingTime}
-              onChange={(e) => setCookingTime(e.target.value)}
-              required
-              min="1"
-              placeholder="Введіть час приготування в хвилинах"
-            />
-          </div>
-
-          <div className={styles.actions}>
-            <button
-              type="button"
-              onClick={onClose}
-              className={styles.cancelBtn}
-              disabled={isSubmitting}
-            >
-              Скасувати
-            </button>
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={isSubmitting}
-            >
-              {isSubmitting
-                ? isEditMode
-                  ? 'Оновлення...'
-                  : 'Додавання...'
-                : isEditMode
-                ? 'Оновити рецепт'
-                : 'Додати рецепт'}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div className={styles.actions}>
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.cancelBtn}
+            disabled={isSubmitting}
+          >
+            Скасувати
+          </button>
+          <button
+            type="submit"
+            className={styles.submitBtn}
+            disabled={isSubmitting}
+          >
+            {isSubmitting
+              ? isEditMode
+                ? 'Оновлення...'
+                : 'Додавання...'
+              : isEditMode
+              ? 'Оновити рецепт'
+              : 'Додати рецепт'}
+          </button>
+        </div>
+      </form>
+    </ModalWrapper>
   );
 }

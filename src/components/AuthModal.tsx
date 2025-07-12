@@ -1,5 +1,7 @@
+// components/AuthModal.tsx
 import {useState} from 'react';
 import {supabase} from '../lib/supabaseClient';
+import ModalWrapper from './ModalWrapper';
 import s from './AuthModal.module.css';
 
 export default function AuthModal({onClose}: {onClose: () => void}) {
@@ -34,57 +36,52 @@ export default function AuthModal({onClose}: {onClose: () => void}) {
   };
 
   return (
-    <div className={s.overlay}>
-      <div className={s.modal}>
-        <button className={s.closeButton} onClick={onClose}>
-          ×
-        </button>
-        <h2 className={s.title}>
-          {mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
-        </h2>
+    <ModalWrapper
+      title={mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
+      onClose={onClose}
+    >
+      <button className={s.googleButton} onClick={handleGoogleLogin}>
+        🟢 Продовжити з Google
+      </button>
 
-        <button className={s.googleButton} onClick={handleGoogleLogin}>
-          🟢 Продовжити з Google
-        </button>
+      <div className={s.divider}>або</div>
 
-        <div className={s.divider}>або</div>
+      <input
+        className={s.input}
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        className={s.input}
+        type="password"
+        placeholder="Пароль"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className={s.submitButton} onClick={handleAuth}>
+        {mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
+      </button>
 
-        <input
-          className={s.input}
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className={s.input}
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={s.submitButton} onClick={handleAuth}>
-          {mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
-        </button>
-        <p className={s.toggleText}>
-          {mode === 'signIn' ? (
-            <>
-              Немає акаунту?
-              <span className={s.toggleLink} onClick={() => setMode('signUp')}>
-                Зареєструватися
-              </span>
-            </>
-          ) : (
-            <>
-              Вже є акаунт?
-              <span className={s.toggleLink} onClick={() => setMode('signIn')}>
-                Увійти
-              </span>
-            </>
-          )}
-        </p>
-        {message && <p className={s.message}>{message}</p>}
-      </div>
-    </div>
+      <p className={s.toggleText}>
+        {mode === 'signIn' ? (
+          <>
+            Немає акаунту?
+            <span className={s.toggleLink} onClick={() => setMode('signUp')}>
+              Зареєструватися
+            </span>
+          </>
+        ) : (
+          <>
+            Вже є акаунт?
+            <span className={s.toggleLink} onClick={() => setMode('signIn')}>
+              Увійти
+            </span>
+          </>
+        )}
+      </p>
+      {message && <p className={s.message}>{message}</p>}
+    </ModalWrapper>
   );
 }
