@@ -13,7 +13,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
 
   const headerRef = useRef<HTMLElement | null>(null);
   const [authOpen, setAuthOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<boolean | null>(true);
+  const [activeMenu, setActiveMenu] = useState<boolean | null>(false);
 
   useEffect(() => {
     const scrollFunction = () => {
