@@ -4,7 +4,13 @@ import {supabase} from '../../lib/supabaseClient';
 import ModalWrapper from '../ModalWrapper';
 import s from './AuthModal.module.css';
 
-export default function AuthModal({onClose}: {onClose: () => void}) {
+export default function AuthModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +43,7 @@ export default function AuthModal({onClose}: {onClose: () => void}) {
 
   return (
     <ModalWrapper
+      isOpen={isOpen}
       title={mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
       onClose={onClose}
     >

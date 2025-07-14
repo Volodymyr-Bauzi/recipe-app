@@ -46,8 +46,19 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
     }
   };
 
+  const body = document.querySelector('body');
   const openAuthModal = () => {
     setAuthOpen(true);
+    if (body) {
+      body.classList.add('modalOpen');
+    }
+  };
+
+  const closeAuthModal = () => {
+    setAuthOpen(false);
+    if (body) {
+      body.classList.remove('modalOpen');
+    }
   };
 
   return (
@@ -98,7 +109,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
         </div>
       </div>
       {/* Auth Modal */}
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
+      {authOpen && <AuthModal isOpen={authOpen} onClose={closeAuthModal} />}
     </header>
   );
 };

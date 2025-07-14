@@ -24,6 +24,11 @@ body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  overflow: auto;
+}
+
+body.modalOpen {
+  overflow: hidden;
 }
 
 @media (prefers-color-scheme: light) {
