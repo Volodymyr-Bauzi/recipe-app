@@ -14,3 +14,10 @@
   width: auto;
   margin: 0 auto;
 }
+
+@media (max-width: 405px) {
+  .footer {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+}
