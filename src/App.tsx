@@ -1,17 +1,17 @@
-import RecipeList from './components/RecipeList';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import RecipePage from './components/RecipePage';
+import HomePage from './components/HomePage/HomePage';
+import RecipePage from './components/RecipePage/RecipePage';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<RecipeList />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/recipe/:id" element={<RecipePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

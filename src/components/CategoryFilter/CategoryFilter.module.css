@@ -1,0 +1,33 @@
+.categoriesSection {
+  margin-bottom: 30px;
+}
+
+.sectionTitle {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.categoriesList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categoryItem {
+  padding: 10px 20px;
+  background: #ffcc80;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  transition: all 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.categoryItem:hover {
+  background: #ffb341;
+  box-shadow: 3px 3px 8px rgb(0 0 0 / 0.2);
+}

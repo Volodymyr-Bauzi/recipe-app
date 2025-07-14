@@ -1,7 +1,7 @@
 // components/AuthModal.tsx
 import {useState} from 'react';
-import {supabase} from '../lib/supabaseClient';
-import ModalWrapper from './ModalWrapper';
+import {supabase} from '../../lib/supabaseClient';
+import ModalWrapper from '../ModalWrapper';
 import s from './AuthModal.module.css';
 
 export default function AuthModal({onClose}: {onClose: () => void}) {

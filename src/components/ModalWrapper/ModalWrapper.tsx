@@ -1,6 +1,6 @@
 // components/ModalWrapper.tsx
 import type {ReactNode, MouseEvent} from 'react';
-import s from './AuthModal.module.css';
+import s from './ModalWrapper.module.css';
 
 interface ModalWrapperProps {
   title: string;

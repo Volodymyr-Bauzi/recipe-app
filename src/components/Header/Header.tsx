@@ -1,7 +1,7 @@
-import {useSupabaseAuth} from '../hooks/useSupabaseAuth';
+import {useSupabaseAuth} from '../../hooks/useSupabaseAuth';
 import {useEffect, useRef, useState} from 'react';
-import {supabase} from '../lib/supabaseClient';
-import AuthModal from './AuthModal';
+import {supabase} from '../../lib/supabaseClient';
+import AuthModal from '../AuthModal/AuthModal';
 import s from './Header.module.css';
 
 interface HeaderProps {
@@ -23,10 +23,10 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           document.body.scrollTop > 50 ||
           document.documentElement.scrollTop > 50
         ) {
-          header.fontSize = '8px';
+          header.fontSize = '6px';
           header.padding = '4px';
         } else {
-          header.fontSize = '15px';
+          header.fontSize = '16px';
           header.padding = '15px';
         }
       }

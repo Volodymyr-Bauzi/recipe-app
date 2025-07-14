@@ -1,0 +1,18 @@
+.searchSection {
+  margin-bottom: 30px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #ffcc80;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  font-size: 16px;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #ffb74d;
+  box-shadow: 0 0 5px #ffb74d;
+}

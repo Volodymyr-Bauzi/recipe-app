@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {supabase} from '../lib/supabaseClient';
+import {supabase} from '../../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
-import type {Recipe} from '../types';
-import ModalWrapper from './ModalWrapper';
+import type {Recipe} from '../../types';
+import ModalWrapper from '../ModalWrapper';
 import styles from './RecipeModal.module.css';
 
 interface RecipeModalProps {
@@ -14,7 +14,7 @@ interface RecipeModalProps {
   recipeToEdit?: Recipe | null;
 }
 
-export function RecipeModal({
+function RecipeModal({
   isOpen,
   onClose,
   user,
@@ -257,3 +257,5 @@ export function RecipeModal({
     </ModalWrapper>
   );
 }
+
+export default RecipeModal;

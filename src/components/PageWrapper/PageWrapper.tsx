@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
-import {RecipeModal} from './RecipeModal';
-import Footer from './Footer';
-import Header from './Header';
+import RecipeModal from '../RecipeModal/RecipeModal';
+import Footer from '../Footer';
+import Header from '../Header';
 import s from './PageWrapper.module.css';
-import {useSupabaseAuth} from '../hooks/useSupabaseAuth';
-import {supabase} from '../lib/supabaseClient';
-import type {Recipe} from '../types';
+import {useSupabaseAuth} from '../../hooks/useSupabaseAuth';
+import {supabase} from '../../lib/supabaseClient';
+import type {Recipe} from '../../types';
 
 interface PageWrapperProps {
   setRecipes: (recipes: Recipe[]) => void;

@@ -94,8 +94,18 @@ header {
   .headerContent {
     width: 80%;
     flex-direction: column;
-    align-items: flex-start;
     margin: 0 auto;
+  }
+
+  .headerMain {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hamburgerMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .headerMain {
@@ -109,7 +119,7 @@ header {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 
     /* Keep it always in the layout, but hide it visually */
     display: flex;
