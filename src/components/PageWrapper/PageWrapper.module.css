@@ -1,16 +1,16 @@
-body {
+.body {
   width: 80vw;
   margin: 0 auto;
-  min-height: 100vh;
   background: #fff5cc;
   color: #5d4037;
 }
 
 .content {
-  margin-top: 7rem;
+  padding-top: 7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 80vw;
+  min-height: 100vh;
 }

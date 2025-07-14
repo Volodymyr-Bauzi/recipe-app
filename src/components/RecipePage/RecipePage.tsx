@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import type {Recipe} from '../../types';
-import styles from './RecipePage.module.css';
+import s from './RecipePage.module.css';
 import PageWrapper from '../PageWrapper/PageWrapper';
 import {supabase} from '../../lib/supabaseClient';
 import RecipeModal from '../RecipeModal';
@@ -106,7 +106,7 @@ const RecipePage: React.FC = () => {
     if (items.length <= 1) return <p>{recipe.ingredients}</p>;
 
     return (
-      <ul className={styles.ingredientsList}>
+      <ul className={s.ingredientsList}>
         {items.map((item, index) => (
           <li key={index}>{item.trim()}</li>
         ))}
@@ -123,7 +123,7 @@ const RecipePage: React.FC = () => {
     if (steps.length <= 1) return <p>{recipe.instructions}</p>;
 
     return (
-      <ol className={styles.instructionsList}>
+      <ol className={s.instructionsList}>
         {steps.map((step, index) => (
           <li key={index}>{step.trim()}</li>
         ))}
@@ -137,23 +137,23 @@ const RecipePage: React.FC = () => {
       searchQuery={searchQuery}
       selectedCategory={selectedCategory}
     >
-      <div className={styles.recipePageContainer}>
-        <Link to="/" className={styles.backButton}>
+      <div className={s.recipePageContainer}>
+        <Link to="/" className={s.backButton}>
           ← Назад до рецептів
         </Link>
 
         {loading ? (
-          <div className={styles.loading}>Loading...</div>
+          <div className={s.loading}>Loading...</div>
         ) : error || !recipe ? (
-          <div className={styles.error}>{error || 'Recipe not found'}</div>
+          <div className={s.error}>{error || 'Recipe not found'}</div>
         ) : (
-          <div className={styles.recipePage}>
-            <div className={styles.recipeHeader}>
-              <h1 className={styles.recipeTitle}>{recipe.title}</h1>
+          <div className={s.recipePage}>
+            <div className={s.recipeHeader}>
+              <h1 className={s.recipeTitle}>{recipe.title}</h1>
 
               {isOwner && (
                 <button
-                  className={styles.editButton}
+                  className={s.editButton}
                   onClick={() => setIsEditModalOpen(true)}
                 >
                   Редагувати
@@ -161,28 +161,28 @@ const RecipePage: React.FC = () => {
               )}
             </div>
 
-            <div className={styles.recipeInfo}>
-              <span className={styles.recipeCategory}>
+            <div className={s.recipeInfo}>
+              <span className={s.recipeCategory}>
                 <strong>Категорія:</strong> {recipe.category}
               </span>
-              <span className={styles.recipeCookingTime}>
+              <span className={s.recipeCookingTime}>
                 <strong>Час приготування:</strong> {recipe.cooking_time} хвилин
               </span>
             </div>
 
             {recipe.description && (
-              <div className={styles.recipeDescription}>
+              <div className={s.recipeDescription}>
                 <p>{recipe.description}</p>
               </div>
             )}
 
-            <div className={styles.recipeSection}>
-              <h2 className={styles.sectionTitle}>Інгредієнти</h2>
+            <div className={s.recipeSection}>
+              <h2 className={s.sectionTitle}>Інгредієнти</h2>
               {formatIngredients()}
             </div>
 
-            <div className={styles.recipeSection}>
-              <h2 className={styles.sectionTitle}>Інструкції</h2>
+            <div className={s.recipeSection}>
+              <h2 className={s.sectionTitle}>Інструкції</h2>
               {formatInstructions()}
             </div>
           </div>

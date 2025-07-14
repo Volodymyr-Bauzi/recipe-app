@@ -19,11 +19,12 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
     const scrollFunction = () => {
       if (headerRef.current) {
         const header = headerRef.current.style;
+        console.log('Header style:', headerRef.current);
         if (
           document.body.scrollTop > 50 ||
           document.documentElement.scrollTop > 50
         ) {
-          header.fontSize = '6px';
+          header.fontSize = '10px';
           header.padding = '4px';
         } else {
           header.fontSize = '16px';
