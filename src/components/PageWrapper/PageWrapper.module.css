@@ -13,4 +13,12 @@
   align-items: center;
   width: 80vw;
   min-height: 100vh;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .body {
+    width: 95vw;
+    margin: 0;
+  }
 }
