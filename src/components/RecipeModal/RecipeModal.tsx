@@ -145,6 +145,7 @@ function RecipeModal({
 
   return (
     <ModalWrapper
+      isOpen={isOpen}
       title={isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}
       onClose={onClose}
     >
