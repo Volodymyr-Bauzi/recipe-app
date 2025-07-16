@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {supabase} from '../../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
 import type {Recipe} from '../../types';
@@ -22,6 +22,7 @@ function RecipeModal({
   onRecipeUpdated,
   recipeToEdit,
 }: RecipeModalProps) {
+  const LOCAL_STORAGE_KEY = 'unsavedRecipeForm';
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState('');
@@ -44,6 +45,54 @@ function RecipeModal({
 
   const isEditMode = !!recipeToEdit;
 
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceSave = useCallback(
+    (timeout = 500) => {
+      const saveToLocalStorage = () => {
+        const formData = {
+          title,
+          description,
+          ingredients,
+          instructions,
+          cookingTime,
+          category,
+          timeStamp: Date.now(),
+        };
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
+      };
+      // Clear any existing timeout
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+      // Set a new timeout
+      saveTimeoutRef.current = setTimeout(saveToLocalStorage, timeout);
+    },
+    [title, description, ingredients, instructions, cookingTime, category]
+  );
+  useEffect(() => {
+    if (!isEditMode) {
+      const savedForm = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (savedForm) {
+        try {
+          const parsedForm = JSON.parse(savedForm);
+
+          const isRecent =
+            Date.now() - parsedForm.timeStamp < 24 * 60 * 60 * 1000; // 24 hours
+          if (isRecent) {
+            setTitle(parsedForm.title || '');
+            setDescription(parsedForm.description || '');
+            setIngredients(parsedForm.ingredients || '');
+            setInstructions(parsedForm.instructions || '');
+            setCookingTime(parsedForm.cookingTime || '');
+            setCategory(parsedForm.category || '');
+          }
+        } catch (error) {
+          console.error('Error parsing saved form:', error);
+        }
+      }
+    }
+  }, [isEditMode]);
+
   useEffect(() => {
     if (recipeToEdit) {
       setTitle(recipeToEdit.title || '');
@@ -54,19 +103,31 @@ function RecipeModal({
         recipeToEdit.cooking_time ? recipeToEdit.cooking_time.toString() : ''
       );
       setCategory(recipeToEdit.category || '');
-    } else {
-      setTitle('');
-      setDescription('');
-      setIngredients('');
-      setInstructions('');
-      setCookingTime('');
-      setCategory('');
+      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear saved form when editing
     }
   }, [recipeToEdit]);
 
+  useEffect(() => {
+    if (!isEditMode) {
+      debounceSave();
+    }
+  }, [
+    title,
+    description,
+    ingredients,
+    instructions,
+    cookingTime,
+    category,
+    debounceSave,
+    isEditMode,
+  ]);
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!user) {
       setError('You must be logged in to manage recipes');
       return;
@@ -124,6 +185,7 @@ function RecipeModal({
       if (error) throw error;
 
       // Clear form and close modal
+      clearLocalStorage();
       setTitle('');
       setDescription('');
       setIngredients('');
