@@ -50,6 +50,27 @@ const PageWrapper = ({
     }
   };
 
+  const body = document.querySelector('body');
+
+  const addRecipeButtonHandler = () => {
+    if (!user) {
+      // If no user is logged in, show an error message or redirect to login
+      console.error('User not logged in');
+      return;
+    }
+    if (body) {
+      body.classList.add('modalOpen');
+    }
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    if (body) {
+      body.classList.remove('modalOpen');
+    }
+    setIsModalOpen(false);
+  };
+
   // Load recipes when component mounts or when search/category changes
   useEffect(() => {
     fetchRecipes();
@@ -57,14 +78,14 @@ const PageWrapper = ({
   return (
     <div className={s.body}>
       <div className={s.content}>
-        <Header onAddRecipeClick={() => setIsModalOpen(true)} />
+        <Header onAddRecipeClick={addRecipeButtonHandler} />
         {children}
         <Footer />
       </div>
 
       <RecipeModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={closeModal}
         user={user}
         onRecipeAdded={fetchRecipes}
       />
