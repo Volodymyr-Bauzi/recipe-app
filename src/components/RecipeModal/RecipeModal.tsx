@@ -33,6 +33,7 @@ function RecipeModal({
   const [error, setError] = useState<string | null>(null);
 
   const categories = [
+    'Торти',
     'Десерти',
     'Основні',
     'Супи',
