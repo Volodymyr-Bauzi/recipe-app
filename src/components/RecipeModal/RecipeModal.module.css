@@ -1,3 +1,13 @@
+.changeFontSize {
+  font-size: 1.2rem;
+  width: 40px;
+  position: absolute;
+}
+
+.changeFontSize:hover {
+  background-color: #5f5f5f;
+}
+
 .formGroup {
   margin-bottom: 16px;
 }
@@ -20,6 +30,8 @@
 
 .formGroup textarea {
   resize: vertical;
+  overflow-y: auto; /* or scroll */
+  scroll-behavior: smooth;
 }
 
 .actions {
