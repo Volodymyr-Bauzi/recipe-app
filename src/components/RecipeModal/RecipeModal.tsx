@@ -15,6 +15,8 @@ interface RecipeModalProps {
   recipeToEdit?: Recipe | null;
 }
 
+const LOCAL_FONT_SIZE_KEY = 'recipeModalFontSize';
+
 function RecipeModal({
   isOpen,
   onClose,
@@ -32,7 +34,10 @@ function RecipeModal({
   const [category, setCategory] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(() => {
+    const stored = localStorage.getItem(LOCAL_FONT_SIZE_KEY);
+    return stored ? parseInt(stored, 10) || 16 : 16;
+  });
 
   const categories = [
     'Торти',

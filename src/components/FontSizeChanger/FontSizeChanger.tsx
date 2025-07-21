@@ -6,15 +6,22 @@ interface FontSizeChangerProps {
   onFontSizeChange: (size: number) => void;
 }
 
+const LOCAL_FONT_SIZE_KEY = 'recipeModalFontSize';
+
 const FontSizeChanger: React.FC<FontSizeChangerProps> = ({
   onFontSizeChange,
 }) => {
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(() => {
+    const stored = localStorage.getItem(LOCAL_FONT_SIZE_KEY);
+    return stored ? parseInt(stored, 10) || 16 : 16;
+  });
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const size = Number(e.target.value);
     setFontSize(size);
+    localStorage.setItem(LOCAL_FONT_SIZE_KEY, size.toString());
     onFontSizeChange(size);
   };
 
@@ -22,6 +29,7 @@ const FontSizeChanger: React.FC<FontSizeChangerProps> = ({
     const val = parseInt(e.target.value, 10);
     if (!isNaN(val)) {
       setFontSize(val);
+      localStorage.setItem(LOCAL_FONT_SIZE_KEY, val.toString());
       onFontSizeChange(val);
     }
   };
