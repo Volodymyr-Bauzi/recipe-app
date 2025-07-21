@@ -10,10 +10,17 @@
   align-items: center;
   gap: 8px;
   background-color: #f0f0f0;
+  color: black;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.changeFontSize:hover {
+  background-color: #e0e0e0;
 }
 
 .changeFontSizeText {
@@ -36,6 +43,25 @@
 
 .slider {
   width: 150px;
+  position: relative;
+}
+
+.slider::before {
+  content: 'a';
+  position: absolute;
+  top: -16px;
+  left: 1px;
+  color: black;
+  font-size: 18px;
+}
+
+.slider::after {
+  content: 'A';
+  position: absolute;
+  top: -16px;
+  right: 1px;
+  color: black;
+  font-size: 18px;
 }
 
 .numberInput {

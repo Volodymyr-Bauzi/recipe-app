@@ -51,10 +51,12 @@
   flex: 1 1 45%; /* 💡 Two buttons per row on small screens */
   min-width: 120px; /* ✅ Avoid too-small buttons */
   box-sizing: border-box;
+  font-weight: bold;
 }
 
 .cancelBtn {
-  background-color: #000;
+  background-color: #2e2e2e;
+  color: #dbd3d1;
 }
 
 .submitBtn {

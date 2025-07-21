@@ -219,13 +219,20 @@ function RecipeModal({
         {error && <div className={styles.errorMessage}>{error}</div>}
 
         <div className={styles.formGroup}>
-          <label htmlFor="title" style={{fontSize: `${fontSize}px`}}>
+          <label
+            htmlFor="title"
+            style={{
+              fontSize: `${fontSize}px`,
+              lineHeight: `${fontSize > 44 ? '36' : fontSize * 1.5}px`,
+              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
+            }}
+          >
             Назва рецепту
           </label>
           <input
             id="title"
             type="text"
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -240,7 +247,7 @@ function RecipeModal({
           <select
             id="category"
             value={category}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={(e) => setCategory(e.target.value)}
             required
             className={styles.select}
@@ -261,7 +268,7 @@ function RecipeModal({
           <textarea
             id="description"
             value={description}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder="Короткий опис рецепту"
@@ -276,7 +283,7 @@ function RecipeModal({
           <textarea
             id="ingredients"
             value={ingredients}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={(e) => setIngredients(e.target.value)}
             required
             placeholder="Введіть інгредієнти (по одному на рядок)"
@@ -291,7 +298,7 @@ function RecipeModal({
           <textarea
             id="instructions"
             value={instructions}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={(e) => setInstructions(e.target.value)}
             required
             placeholder="Введіть інструкції з приготування"
@@ -300,14 +307,21 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="cookingTime" style={{fontSize: `${fontSize}px`}}>
+          <label
+            htmlFor="cookingTime"
+            style={{
+              fontSize: `${fontSize}px`,
+              lineHeight: `${fontSize > 44 ? '40' : fontSize * 1.5}px`,
+              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
+            }}
+          >
             Час приготування (хвилини)
           </label>
           <input
             id="cookingTime"
             type="number"
             value={cookingTime}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={(e) => setCookingTime(e.target.value)}
             required
             min="1"
@@ -321,7 +335,7 @@ function RecipeModal({
             onClick={onClose}
             className={styles.cancelBtn}
             disabled={isSubmitting}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 24 ? '24' : fontSize}px`}}
           >
             Скасувати
           </button>
@@ -329,7 +343,7 @@ function RecipeModal({
             type="submit"
             className={styles.submitBtn}
             disabled={isSubmitting}
-            style={{fontSize: `${fontSize}px`}}
+            style={{fontSize: `${fontSize > 30 ? '26' : fontSize}px`}}
           >
             {isSubmitting
               ? isEditMode
