@@ -4,6 +4,7 @@ import type {User} from '@supabase/supabase-js';
 import type {Recipe} from '../../types';
 import ModalWrapper from '../ModalWrapper';
 import styles from './RecipeModal.module.css';
+import FontSizeChanger from '../FontSizeChanger';
 
 interface RecipeModalProps {
   isOpen: boolean;
@@ -31,6 +32,7 @@ function RecipeModal({
   const [category, setCategory] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fontSize, setFontSize] = useState(16);
 
   const categories = [
     'Торти',
@@ -212,14 +214,18 @@ function RecipeModal({
       title={isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}
       onClose={onClose}
     >
+      <FontSizeChanger onFontSizeChange={(size) => setFontSize(size)} />
       <form onSubmit={handleSubmit} className={styles.form}>
         {error && <div className={styles.errorMessage}>{error}</div>}
 
         <div className={styles.formGroup}>
-          <label htmlFor="title">Назва рецепту</label>
+          <label htmlFor="title" style={{fontSize: `${fontSize}px`}}>
+            Назва рецепту
+          </label>
           <input
             id="title"
             type="text"
+            style={{fontSize: `${fontSize}px`}}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -228,10 +234,13 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="category">Категорія</label>
+          <label htmlFor="category" style={{fontSize: `${fontSize}px`}}>
+            Категорія
+          </label>
           <select
             id="category"
             value={category}
+            style={{fontSize: `${fontSize}px`}}
             onChange={(e) => setCategory(e.target.value)}
             required
             className={styles.select}
@@ -246,10 +255,13 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="description">Опис</label>
+          <label htmlFor="description" style={{fontSize: `${fontSize}px`}}>
+            Опис
+          </label>
           <textarea
             id="description"
             value={description}
+            style={{fontSize: `${fontSize}px`}}
             onChange={(e) => setDescription(e.target.value)}
             required
             placeholder="Короткий опис рецепту"
@@ -258,10 +270,13 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="ingredients">Інгредієнти</label>
+          <label htmlFor="ingredients" style={{fontSize: `${fontSize}px`}}>
+            Інгредієнти
+          </label>
           <textarea
             id="ingredients"
             value={ingredients}
+            style={{fontSize: `${fontSize}px`}}
             onChange={(e) => setIngredients(e.target.value)}
             required
             placeholder="Введіть інгредієнти (по одному на рядок)"
@@ -270,10 +285,13 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="instructions">Інструкції</label>
+          <label htmlFor="instructions" style={{fontSize: `${fontSize}px`}}>
+            Інструкції
+          </label>
           <textarea
             id="instructions"
             value={instructions}
+            style={{fontSize: `${fontSize}px`}}
             onChange={(e) => setInstructions(e.target.value)}
             required
             placeholder="Введіть інструкції з приготування"
@@ -282,11 +300,14 @@ function RecipeModal({
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="cookingTime">Час приготування (хвилини)</label>
+          <label htmlFor="cookingTime" style={{fontSize: `${fontSize}px`}}>
+            Час приготування (хвилини)
+          </label>
           <input
             id="cookingTime"
             type="number"
             value={cookingTime}
+            style={{fontSize: `${fontSize}px`}}
             onChange={(e) => setCookingTime(e.target.value)}
             required
             min="1"
@@ -300,6 +321,7 @@ function RecipeModal({
             onClick={onClose}
             className={styles.cancelBtn}
             disabled={isSubmitting}
+            style={{fontSize: `${fontSize}px`}}
           >
             Скасувати
           </button>
@@ -307,6 +329,7 @@ function RecipeModal({
             type="submit"
             className={styles.submitBtn}
             disabled={isSubmitting}
+            style={{fontSize: `${fontSize}px`}}
           >
             {isSubmitting
               ? isEditMode

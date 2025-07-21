@@ -1,0 +1,56 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.changeFontSize {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.changeFontSizeText {
+  font-size: 16px;
+}
+
+.fontSizeControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+}
+
+.slider {
+  width: 150px;
+}
+
+.numberInput {
+  width: 60px;
+  padding: 4px;
+}
+
+.unit {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+.previewText {
+  margin-top: 1rem;
+  font-size: 16px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
