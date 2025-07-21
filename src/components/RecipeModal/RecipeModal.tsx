@@ -228,7 +228,7 @@ function RecipeModal({
             htmlFor="title"
             style={{
               fontSize: `${fontSize}px`,
-              lineHeight: `${fontSize > 44 ? '36' : fontSize * 1.5}px`,
+              lineHeight: `${fontSize > 41 ? '36' : fontSize * 1.5}px`,
               marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
             }}
           >
