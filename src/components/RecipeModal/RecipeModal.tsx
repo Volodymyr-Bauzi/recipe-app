@@ -16,6 +16,19 @@ interface RecipeModalProps {
 }
 
 const LOCAL_FONT_SIZE_KEY = 'recipeModalFontSize';
+const LOCAL_STORAGE_KEY = 'unsavedRecipeForm';
+
+const categories = [
+  'Торти',
+  'Десерти',
+  'Основні',
+  'Супи',
+  'Гарніри',
+  'Салати',
+  "М'ясне",
+  'Закрутки',
+  'Закуски',
+];
 
 function RecipeModal({
   isOpen,
@@ -25,13 +38,14 @@ function RecipeModal({
   onRecipeUpdated,
   recipeToEdit,
 }: RecipeModalProps) {
-  const LOCAL_STORAGE_KEY = 'unsavedRecipeForm';
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [cookingTime, setCookingTime] = useState('');
-  const [category, setCategory] = useState('');
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    ingredients: '',
+    instructions: '',
+    cookingTime: '',
+    category: '',
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fontSize, setFontSize] = useState(() => {
@@ -39,100 +53,79 @@ function RecipeModal({
     return stored ? parseInt(stored, 10) || 16 : 16;
   });
 
-  const categories = [
-    'Торти',
-    'Десерти',
-    'Основні',
-    'Супи',
-    'Гарніри',
-    'Салати',
-    "М'ясне",
-    'Закрутки',
-    'Закуски',
-  ];
-
   const isEditMode = !!recipeToEdit;
-
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const updateForm = (field: string, value: string) => {
+    setForm((prev) => ({...prev, [field]: value}));
+  };
+
+  const clearForm = () => {
+    setForm({
+      title: '',
+      description: '',
+      ingredients: '',
+      instructions: '',
+      cookingTime: '',
+      category: '',
+    });
+  };
+
+  const fontSizeStyle = (multiplayer = 1) => ({
+    fontSize: `${fontSize > 30 ? 24 : fontSize * multiplayer}px`,
+  });
+
   const debounceSave = useCallback(
     (timeout = 500) => {
-      const saveToLocalStorage = () => {
-        const formData = {
-          title,
-          description,
-          ingredients,
-          instructions,
-          cookingTime,
-          category,
-          timeStamp: Date.now(),
-        };
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
-      };
-      // Clear any existing timeout
-      if (saveTimeoutRef.current) {
-        clearTimeout(saveTimeoutRef.current);
-      }
-      // Set a new timeout
-      saveTimeoutRef.current = setTimeout(saveToLocalStorage, timeout);
+      if (isEditMode) return;
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = setTimeout(() => {
+        localStorage.setItem(
+          LOCAL_STORAGE_KEY,
+          JSON.stringify({...form, timeStamp: Date.now()})
+        );
+      }, timeout);
     },
-    [title, description, ingredients, instructions, cookingTime, category]
+    [form, isEditMode]
   );
   useEffect(() => {
-    if (!isEditMode) {
-      const savedForm = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (savedForm) {
+    if (recipeToEdit) {
+      setForm({
+        title: recipeToEdit.title || '',
+        description: recipeToEdit.description || '',
+        ingredients: recipeToEdit.ingredients || '',
+        instructions: recipeToEdit.instructions || '',
+        cookingTime: recipeToEdit.cooking_time
+          ? recipeToEdit.cooking_time.toString()
+          : '',
+        category: recipeToEdit.category || '',
+      });
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+    } else {
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (saved) {
         try {
-          const parsedForm = JSON.parse(savedForm);
-
-          const isRecent =
-            Date.now() - parsedForm.timeStamp < 24 * 60 * 60 * 1000; // 24 hours
-          if (isRecent) {
-            setTitle(parsedForm.title || '');
-            setDescription(parsedForm.description || '');
-            setIngredients(parsedForm.ingredients || '');
-            setInstructions(parsedForm.instructions || '');
-            setCookingTime(parsedForm.cookingTime || '');
-            setCategory(parsedForm.category || '');
+          const parsed = JSON.parse(saved);
+          if (Date.now() - parsed.timeStamp < 86400000) {
+            setForm({
+              title: parsed.title || '',
+              description: parsed.description || '',
+              ingredients: parsed.ingredients || '',
+              instructions: parsed.instructions || '',
+              cookingTime: parsed.cookingTime || '',
+              category: parsed.category || '',
+            });
           }
-        } catch (error) {
-          console.error('Error parsing saved form:', error);
+        } catch (e) {
+          console.error('Error parsing saved recipe form:', e);
         }
       }
-    }
-  }, [isEditMode]);
-
-  useEffect(() => {
-    if (recipeToEdit) {
-      setTitle(recipeToEdit.title || '');
-      setDescription(recipeToEdit.description || '');
-      setIngredients(recipeToEdit.ingredients || '');
-      setInstructions(recipeToEdit.instructions || '');
-      setCookingTime(
-        recipeToEdit.cooking_time ? recipeToEdit.cooking_time.toString() : ''
-      );
-      setCategory(recipeToEdit.category || '');
-      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear saved form when editing
     }
   }, [recipeToEdit]);
 
   useEffect(() => {
-    if (!isEditMode) {
-      debounceSave();
-    }
-  }, [
-    title,
-    description,
-    ingredients,
-    instructions,
-    cookingTime,
-    category,
-    debounceSave,
-    isEditMode,
-  ]);
-
-  const clearLocalStorage = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-  };
+    debounceSave();
+  }, [form, debounceSave]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,52 +147,29 @@ function RecipeModal({
       }
 
       const recipeData = {
-        title,
-        description,
-        ingredients,
-        instructions,
-        cooking_time: cookingTime ? parseInt(cookingTime) : null,
-        category,
+        ...form,
+        cooking_time: form.cookingTime ? parseInt(form.cookingTime) : null,
         user_id: currentUser.id,
       };
 
-      let error;
+      const table = supabase.from('recipes');
+      let supabaseError;
 
       if (isEditMode && recipeToEdit) {
-        const {error: updateError} = await supabase
-          .from('recipes')
+        ({error: supabaseError} = await table
           .update(recipeData)
           .eq('id', recipeToEdit.id)
-          .select();
-
-        error = updateError;
-
-        if (!error && onRecipeUpdated) {
-          onRecipeUpdated();
-        }
+          .select());
+        if (!supabaseError && onRecipeUpdated) onRecipeUpdated();
       } else {
-        const {error: insertError} = await supabase
-          .from('recipes')
-          .insert([recipeData])
-          .select();
-
-        error = insertError;
-
-        if (!error && onRecipeAdded) {
-          onRecipeAdded();
-        }
+        ({error: supabaseError} = await table.insert([recipeData]).select());
+        if (!supabaseError && onRecipeAdded) onRecipeAdded();
       }
 
-      if (error) throw error;
+      if (supabaseError) throw supabaseError;
 
-      // Clear form and close modal
-      clearLocalStorage();
-      setTitle('');
-      setDescription('');
-      setIngredients('');
-      setInstructions('');
-      setCookingTime('');
-      setCategory('');
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+      clearForm();
       onClose();
     } catch (err) {
       console.error(`Error ${isEditMode ? 'updating' : 'adding'} recipe:`, err);
@@ -213,47 +183,84 @@ function RecipeModal({
 
   if (!isOpen) return null;
 
+  const FormGroup = ({
+    id,
+    label,
+    value,
+    onChange,
+    placeholder,
+    type = 'text',
+    textarea = false,
+    required = true,
+    rows = 3,
+  }: {
+    id: string;
+    label: string;
+    value: string;
+    onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    placeholder?: string;
+    type?: string;
+    textarea?: boolean;
+    required?: boolean;
+    rows?: number;
+  }) => (
+    <div className={styles.formGroup}>
+      <label htmlFor={id} style={fontSizeStyle()}>
+        {label}
+      </label>
+      {textarea ? (
+        <textarea
+          id={id}
+          value={value}
+          style={fontSizeStyle()}
+          onChange={onChange}
+          required={required}
+          placeholder={placeholder}
+          rows={rows}
+        />
+      ) : (
+        <input
+          id={id}
+          type={type}
+          value={value}
+          style={fontSizeStyle()}
+          onChange={onChange}
+          required={required}
+          placeholder={placeholder}
+        />
+      )}
+    </div>
+  );
+
   return (
     <ModalWrapper
       isOpen={isOpen}
       title={isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}
       onClose={onClose}
     >
-      <FontSizeChanger onFontSizeChange={(size) => setFontSize(size)} />
+      <FontSizeChanger onFontSizeChange={setFontSize} />
       <form onSubmit={handleSubmit} className={styles.form}>
         {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <div className={styles.formGroup}>
-          <label
-            htmlFor="title"
-            style={{
-              fontSize: `${fontSize}px`,
-              lineHeight: `${fontSize > 41 ? '36' : fontSize * 1.5}px`,
-              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
-            }}
-          >
-            Назва рецепту
-          </label>
-          <input
-            id="title"
-            type="text"
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            placeholder="Введіть назву рецепту"
-          />
-        </div>
+        <FormGroup
+          id="title"
+          label="Назва рецепту"
+          value={form.title}
+          onChange={(e) => updateForm('title', e.target.value)}
+          placeholder="Введіть назву рецепту"
+        />
 
         <div className={styles.formGroup}>
-          <label htmlFor="category" style={{fontSize: `${fontSize}px`}}>
+          <label htmlFor="category" style={fontSizeStyle()}>
             Категорія
           </label>
           <select
             id="category"
-            value={category}
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            onChange={(e) => setCategory(e.target.value)}
+            value={form.category}
+            style={fontSizeStyle()}
+            onChange={(e) => updateForm('category', e.target.value)}
             required
             className={styles.select}
           >
@@ -266,73 +273,44 @@ function RecipeModal({
           </select>
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="description" style={{fontSize: `${fontSize}px`}}>
-            Опис
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            placeholder="Короткий опис рецепту"
-            rows={3}
-          />
-        </div>
+        <FormGroup
+          id="description"
+          label="Опис"
+          value={form.description}
+          onChange={(e) => updateForm('description', e.target.value)}
+          placeholder="Короткий опис рецепту"
+          textarea
+          rows={3}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="ingredients" style={{fontSize: `${fontSize}px`}}>
-            Інгредієнти
-          </label>
-          <textarea
-            id="ingredients"
-            value={ingredients}
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            onChange={(e) => setIngredients(e.target.value)}
-            required
-            placeholder="Введіть інгредієнти (по одному на рядок)"
-            rows={5}
-          />
-        </div>
+        <FormGroup
+          id="ingredients"
+          label="Інгредієнти"
+          value={form.ingredients}
+          onChange={(e) => updateForm('ingredients', e.target.value)}
+          placeholder="Введіть інгредієнти (по одному на рядок)"
+          textarea
+          rows={5}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="instructions" style={{fontSize: `${fontSize}px`}}>
-            Інструкції
-          </label>
-          <textarea
-            id="instructions"
-            value={instructions}
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            onChange={(e) => setInstructions(e.target.value)}
-            required
-            placeholder="Введіть інструкції з приготування"
-            rows={5}
-          />
-        </div>
+        <FormGroup
+          id="instructions"
+          label="Інструкції"
+          value={form.instructions}
+          onChange={(e) => updateForm('instructions', e.target.value)}
+          placeholder="Введіть інструкції з приготування"
+          textarea
+          rows={5}
+        />
 
-        <div className={styles.formGroup}>
-          <label
-            htmlFor="cookingTime"
-            style={{
-              fontSize: `${fontSize}px`,
-              lineHeight: `${fontSize > 44 ? '40' : fontSize * 1.5}px`,
-              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
-            }}
-          >
-            Час приготування (хвилини)
-          </label>
-          <input
-            id="cookingTime"
-            type="number"
-            value={cookingTime}
-            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
-            onChange={(e) => setCookingTime(e.target.value)}
-            required
-            min="1"
-            placeholder="Введіть час приготування в хвилинах"
-          />
-        </div>
+        <FormGroup
+          id="cookingTime"
+          label="Час приготування (хвилини)"
+          value={form.cookingTime}
+          onChange={(e) => updateForm('cookingTime', e.target.value)}
+          placeholder="Введіть час приготування в хвилинах"
+          type="number"
+        />
 
         <div className={styles.actions}>
           <button
@@ -340,7 +318,7 @@ function RecipeModal({
             onClick={onClose}
             className={styles.cancelBtn}
             disabled={isSubmitting}
-            style={{fontSize: `${fontSize > 24 ? '24' : fontSize}px`}}
+            style={fontSizeStyle()}
           >
             Скасувати
           </button>
@@ -348,7 +326,7 @@ function RecipeModal({
             type="submit"
             className={styles.submitBtn}
             disabled={isSubmitting}
-            style={{fontSize: `${fontSize > 30 ? '26' : fontSize}px`}}
+            style={fontSizeStyle()}
           >
             {isSubmitting
               ? isEditMode
