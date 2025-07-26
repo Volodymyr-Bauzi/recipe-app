@@ -56,8 +56,13 @@ function RecipeModal({
   const isEditMode = !!recipeToEdit;
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const updateForm = (field: string, value: string) => {
-    setForm((prev) => ({...prev, [field]: value}));
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const {id, value} = e.target;
+    setForm((prev) => ({...prev, [id]: value}));
   };
 
   const clearForm = () => {
@@ -70,10 +75,6 @@ function RecipeModal({
       category: '',
     });
   };
-
-  const fontSizeStyle = (multiplayer = 1) => ({
-    fontSize: `${fontSize > 30 ? 24 : fontSize * multiplayer}px`,
-  });
 
   const debounceSave = useCallback(
     (timeout = 500) => {
@@ -183,57 +184,6 @@ function RecipeModal({
 
   if (!isOpen) return null;
 
-  const FormGroup = ({
-    id,
-    label,
-    value,
-    onChange,
-    placeholder,
-    type = 'text',
-    textarea = false,
-    required = true,
-    rows = 3,
-  }: {
-    id: string;
-    label: string;
-    value: string;
-    onChange: (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => void;
-    placeholder?: string;
-    type?: string;
-    textarea?: boolean;
-    required?: boolean;
-    rows?: number;
-  }) => (
-    <div className={styles.formGroup}>
-      <label htmlFor={id} style={fontSizeStyle()}>
-        {label}
-      </label>
-      {textarea ? (
-        <textarea
-          id={id}
-          value={value}
-          style={fontSizeStyle()}
-          onChange={onChange}
-          required={required}
-          placeholder={placeholder}
-          rows={rows}
-        />
-      ) : (
-        <input
-          id={id}
-          type={type}
-          value={value}
-          style={fontSizeStyle()}
-          onChange={onChange}
-          required={required}
-          placeholder={placeholder}
-        />
-      )}
-    </div>
-  );
-
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -241,26 +191,42 @@ function RecipeModal({
       onClose={onClose}
     >
       <FontSizeChanger onFontSizeChange={setFontSize} />
+
       <form onSubmit={handleSubmit} className={styles.form}>
         {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <FormGroup
-          id="title"
-          label="Назва рецепту"
-          value={form.title}
-          onChange={(e) => updateForm('title', e.target.value)}
-          placeholder="Введіть назву рецепту"
-        />
-
         <div className={styles.formGroup}>
-          <label htmlFor="category" style={fontSizeStyle()}>
+          <label
+            htmlFor="title"
+            style={{
+              fontSize: `${fontSize}px`,
+              lineHeight: `${fontSize > 41 ? '36' : fontSize * 1.5}px`,
+              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
+            }}
+          >
+            Назва рецепту
+          </label>
+          <input
+            id="title"
+            type="text"
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            value={form.title}
+            onChange={handleChange}
+            required
+            placeholder="Введіть назву рецепту"
+          />
+        </div>
+
+        {/* Category */}
+        <div className={styles.formGroup}>
+          <label htmlFor="category" style={{fontSize: `${fontSize}px`}}>
             Категорія
           </label>
           <select
             id="category"
             value={form.category}
-            style={fontSizeStyle()}
-            onChange={(e) => updateForm('category', e.target.value)}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            onChange={handleChange}
             required
             className={styles.select}
           >
@@ -273,52 +239,86 @@ function RecipeModal({
           </select>
         </div>
 
-        <FormGroup
-          id="description"
-          label="Опис"
-          value={form.description}
-          onChange={(e) => updateForm('description', e.target.value)}
-          placeholder="Короткий опис рецепту"
-          textarea
-          rows={3}
-        />
+        {/* Description */}
+        <div className={styles.formGroup}>
+          <label htmlFor="description" style={{fontSize: `${fontSize}px`}}>
+            Опис
+          </label>
+          <textarea
+            id="description"
+            value={form.description}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            onChange={handleChange}
+            required
+            placeholder="Короткий опис рецепту"
+            rows={3}
+          />
+        </div>
 
-        <FormGroup
-          id="ingredients"
-          label="Інгредієнти"
-          value={form.ingredients}
-          onChange={(e) => updateForm('ingredients', e.target.value)}
-          placeholder="Введіть інгредієнти (по одному на рядок)"
-          textarea
-          rows={5}
-        />
+        {/* Ingredients */}
+        <div className={styles.formGroup}>
+          <label htmlFor="ingredients" style={{fontSize: `${fontSize}px`}}>
+            Інгредієнти
+          </label>
+          <textarea
+            id="ingredients"
+            value={form.ingredients}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            onChange={handleChange}
+            required
+            placeholder="Введіть інгредієнти (по одному на рядок)"
+            rows={5}
+          />
+        </div>
 
-        <FormGroup
-          id="instructions"
-          label="Інструкції"
-          value={form.instructions}
-          onChange={(e) => updateForm('instructions', e.target.value)}
-          placeholder="Введіть інструкції з приготування"
-          textarea
-          rows={5}
-        />
+        {/* Instructions */}
+        <div className={styles.formGroup}>
+          <label htmlFor="instructions" style={{fontSize: `${fontSize}px`}}>
+            Інструкції
+          </label>
+          <textarea
+            id="instructions"
+            value={form.instructions}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            onChange={handleChange}
+            required
+            placeholder="Введіть інструкції з приготування"
+            rows={5}
+          />
+        </div>
 
-        <FormGroup
-          id="cookingTime"
-          label="Час приготування (хвилини)"
-          value={form.cookingTime}
-          onChange={(e) => updateForm('cookingTime', e.target.value)}
-          placeholder="Введіть час приготування в хвилинах"
-          type="number"
-        />
+        {/* Cooking Time */}
+        <div className={styles.formGroup}>
+          <label
+            htmlFor="cookingTime"
+            style={{
+              fontSize: `${fontSize}px`,
+              lineHeight: `${fontSize > 44 ? '40' : fontSize * 1.5}px`,
+              marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
+            }}
+          >
+            Час приготування (хвилини)
+          </label>
+          <input
+            id="cookingTime"
+            type="number"
+            value={form.cookingTime}
+            style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
+            onChange={handleChange}
+            required
+            min="1"
+            placeholder="Введіть час приготування в хвилинах"
+          />
+        </div>
 
+        {/* Actions */}
         <div className={styles.actions}>
           <button
             type="button"
             onClick={onClose}
             className={styles.cancelBtn}
             disabled={isSubmitting}
-            style={fontSizeStyle()}
+            style={{fontSize: `${fontSize > 24 ? '24' : fontSize}px`}}
           >
             Скасувати
           </button>
@@ -326,7 +326,7 @@ function RecipeModal({
             type="submit"
             className={styles.submitBtn}
             disabled={isSubmitting}
-            style={fontSizeStyle()}
+            style={{fontSize: `${fontSize > 30 ? '26' : fontSize}px`}}
           >
             {isSubmitting
               ? isEditMode
