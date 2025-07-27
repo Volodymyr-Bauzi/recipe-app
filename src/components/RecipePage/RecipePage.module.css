@@ -6,15 +6,12 @@
 
 .recipeTitle {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
   color: #222;
 }
 
 .recipeInfo {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
   font-size: 1rem;
 }
 
@@ -27,21 +24,15 @@
 .recipeDescription {
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
   color: #555;
-  padding: 1rem;
+  padding: 0 1rem;
   border-radius: 0 4px 4px 0;
-}
-
-.recipeSection {
-  margin-bottom: 2rem;
 }
 
 .sectionTitle {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #f0f0f0;
 }
 
 .ingredientsList {

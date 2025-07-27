@@ -6,6 +6,7 @@ import PageWrapper from '../PageWrapper/PageWrapper';
 import {supabase} from '../../lib/supabaseClient';
 import RecipeModal from '../RecipeModal';
 import type {User} from '@supabase/supabase-js';
+import {FaStopwatch} from 'react-icons/fa6';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -163,10 +164,14 @@ const RecipePage: React.FC = () => {
 
             <div className={s.recipeInfo}>
               <span className={s.recipeCategory}>
-                <strong>Категорія:</strong> {recipe.category}
+                <strong>🍽️ Категорія:</strong> {recipe.category}
               </span>
               <span className={s.recipeCookingTime}>
-                <strong>Час приготування:</strong> {recipe.cooking_time} хвилин
+                <strong>
+                  <FaStopwatch />
+                  Час приготування:
+                </strong>{' '}
+                {recipe.cooking_time} хвилин
               </span>
             </div>
 

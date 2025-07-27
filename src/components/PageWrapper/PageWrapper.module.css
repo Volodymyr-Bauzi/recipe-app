@@ -11,9 +11,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 80vw;
   min-height: 100vh;
-  margin: 0 auto;
+  margin: 0 2rem;
 }
 
 @media (max-width: 768px) {

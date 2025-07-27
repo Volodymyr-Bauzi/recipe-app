@@ -80,8 +80,8 @@ const PageWrapper = ({
       <div className={s.content}>
         <Header onAddRecipeClick={addRecipeButtonHandler} />
         {children}
-        <Footer />
       </div>
+      <Footer />
 
       <RecipeModal
         isOpen={isModalOpen}
