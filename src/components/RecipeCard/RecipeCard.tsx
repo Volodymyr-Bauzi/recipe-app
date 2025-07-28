@@ -5,17 +5,18 @@ import {BiCategory} from 'react-icons/bi';
 import {FaStopwatch} from 'react-icons/fa6';
 import {RiFileList3Line} from 'react-icons/ri';
 
-const formatRecipeIngredients = (ingredients: string | undefined) => {
-  if (!ingredients) return null;
-  return ingredients
-    .split('\n')
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .join(', ');
-};
-
 const RecipeCard = ({recipe}: {recipe: Recipe}) => {
-  const formattedIngredients = formatRecipeIngredients(recipe.ingredients);
+  if (!recipe?.id || !recipe?.title) {
+    console.warn('RecipeCard: Invalid recipe data', recipe);
+    return null;
+  }
+
+  const formattedIngredients =
+    recipe.ingredients
+      ?.split('\n')
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .join(', ') ?? '';
 
   return (
     <Link to={`/recipe/${recipe.id}`} className={s.recipeCard}>
