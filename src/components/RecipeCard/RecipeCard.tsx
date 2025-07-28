@@ -18,11 +18,7 @@ const RecipeCard = ({recipe}: {recipe: Recipe}) => {
   const formattedIngredients = formatRecipeIngredients(recipe.ingredients);
 
   return (
-    <Link
-      to={`/recipe/${recipe.id}`}
-      className={s.recipeCard}
-      style={{textDecoration: 'none', color: 'inherit'}}
-    >
+    <Link to={`/recipe/${recipe.id}`} className={s.recipeCard}>
       <h3 className={s.recipeTitle}>{recipe.title}</h3>
       <div className={s.recipeDetails}>
         <p className={s.recipeCategory}>
