@@ -6,7 +6,10 @@ import PageWrapper from '../PageWrapper/PageWrapper';
 import {supabase} from '../../lib/supabaseClient';
 import RecipeModal from '../RecipeModal';
 import type {User} from '@supabase/supabase-js';
-import {FaStopwatch} from 'react-icons/fa6';
+import {FaRegPenToSquare, FaStopwatch} from 'react-icons/fa6';
+import {BiCategory} from 'react-icons/bi';
+import {RiFileList3Line} from 'react-icons/ri';
+import {GoChecklist} from 'react-icons/go';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -157,6 +160,7 @@ const RecipePage: React.FC = () => {
                   className={s.editButton}
                   onClick={() => setIsEditModalOpen(true)}
                 >
+                  <FaRegPenToSquare />
                   Редагувати
                 </button>
               )}
@@ -164,13 +168,15 @@ const RecipePage: React.FC = () => {
 
             <div className={s.recipeInfo}>
               <span className={s.recipeCategory}>
-                <strong>🍽️ Категорія:</strong> {recipe.category}
+                <BiCategory />
+                <strong>Категорія:</strong>
+                &nbsp;
+                {recipe.category}
               </span>
               <span className={s.recipeCookingTime}>
-                <strong>
-                  <FaStopwatch />
-                  Час приготування:
-                </strong>{' '}
+                <FaStopwatch />
+                <strong>Час приготування:</strong>
+                &nbsp;
                 {recipe.cooking_time} хвилин
               </span>
             </div>
@@ -182,12 +188,17 @@ const RecipePage: React.FC = () => {
             )}
 
             <div className={s.recipeSection}>
-              <h2 className={s.sectionTitle}>Інгредієнти</h2>
+              <h2 className={s.sectionTitle}>
+                <RiFileList3Line /> Інгредієнти:
+              </h2>
               {formatIngredients()}
             </div>
 
             <div className={s.recipeSection}>
-              <h2 className={s.sectionTitle}>Інструкції</h2>
+              <h2 className={s.sectionTitle}>
+                <GoChecklist />
+                Інструкція з приготування:
+              </h2>
               {formatInstructions()}
             </div>
           </div>

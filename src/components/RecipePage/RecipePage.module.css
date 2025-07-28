@@ -15,6 +15,11 @@
   font-size: 1rem;
 }
 
+.recipeInfo span {
+  display: flex;
+  align-items: center;
+}
+
 .recipeCategory,
 .recipeCookingTime {
   padding: 0.5rem 1rem;
@@ -33,6 +38,8 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .ingredientsList {
