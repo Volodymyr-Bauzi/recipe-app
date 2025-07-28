@@ -7,7 +7,11 @@ import {RiFileList3Line} from 'react-icons/ri';
 
 const formatRecipeIngredients = (ingredients: string | undefined) => {
   if (!ingredients) return null;
-  return ingredients.split('\n').join(', ');
+  return ingredients
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .join(', ');
 };
 
 const RecipeCard = ({recipe}: {recipe: Recipe}) => {
