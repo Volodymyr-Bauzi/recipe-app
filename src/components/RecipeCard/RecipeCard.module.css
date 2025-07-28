@@ -5,7 +5,8 @@
   box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
   overflow: hidden;
   transition: box-shadow 0.3s ease;
-  padding: 16px;
+  padding: 20px;
+  min-height: 12rem;
 }
 .recipeCard:hover {
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
@@ -16,6 +17,28 @@
   font-weight: bold;
   margin: 16px;
   text-align: center;
+}
+
+.recipeDetails {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipeCategory,
+.recipeTime {
+  display: flex;
+  align-items: center;
+}
+.ingredientsList {
+  list-style: none;
+  padding: 0;
+  width: 80px;
+  height: 80px;
+}
+
+.ingredients {
+  font-weight: 100;
+  font-size: 14px;
 }
 
 @media (max-width: 889px) {

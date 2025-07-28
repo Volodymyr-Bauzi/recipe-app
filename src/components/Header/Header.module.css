@@ -76,14 +76,17 @@
   border: 3px solid grey;
 }
 
+.logoutBtn:hover,
+.authButton:hover,
+.addButton:hover,
+.toggleNavBarButton:hover {
+  background-color: #e6b800;
+  border-color: black;
+}
+
 .addButton::before {
   content: '➕';
   margin-right: 5px;
-}
-
-.addButton:hover {
-  background: #ffb341;
-  box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
 }
 
 .hamburgerMenu {

@@ -10,6 +10,7 @@ import {FaRegPenToSquare, FaStopwatch} from 'react-icons/fa6';
 import {BiCategory} from 'react-icons/bi';
 import {RiFileList3Line} from 'react-icons/ri';
 import {GoChecklist} from 'react-icons/go';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -135,6 +136,8 @@ const RecipePage: React.FC = () => {
     );
   };
 
+  const width = useWindowWidth();
+
   return (
     <PageWrapper
       setRecipes={emptySetRecipes}
@@ -197,7 +200,7 @@ const RecipePage: React.FC = () => {
             <div className={s.recipeSection}>
               <h2 className={s.sectionTitle}>
                 <GoChecklist />
-                Інструкція з приготування:
+                {width < 426 ? ' Інструкції' : 'Інструкції з приготування:'}
               </h2>
               {formatInstructions()}
             </div>
