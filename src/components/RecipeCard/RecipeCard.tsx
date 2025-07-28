@@ -16,7 +16,6 @@ const RecipeCard = ({recipe}: {recipe: Recipe}) => {
   return (
     <Link
       to={`/recipe/${recipe.id}`}
-      key={recipe.id}
       className={s.recipeCard}
       style={{textDecoration: 'none', color: 'inherit'}}
     >
