@@ -37,7 +37,7 @@ const RecipeCard = ({recipe}: {recipe: Recipe}) => {
         )}
       </div>
       <div className={s.recipeDescription}>
-        <RiFileList3Line /> Інгредєнти:&nbsp;
+        <RiFileList3Line /> Інгредієнти:&nbsp;
         <span className={s.ingredients}>
           {formattedIngredients || 'Немає інгредієнтів'}
         </span>
