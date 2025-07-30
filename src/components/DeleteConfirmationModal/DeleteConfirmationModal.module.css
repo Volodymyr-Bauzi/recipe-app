@@ -1,0 +1,127 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.deleteConfirmationModal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  transform: scale(0.9);
+  animation: scaleUp 0.3s ease-out forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modalTitle {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.modalDescription {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.cancelButton,
+.confirmDeleteButton {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cancelButton {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
+.confirmDeleteButton {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.confirmDeleteButton:hover {
+  background-color: #ff3333;
+}
+
+.cancelButton:active,
+.confirmDeleteButton:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .deleteConfirmationModal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modalButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cancelButton,
+  .confirmDeleteButton {
+    padding: 10px 15px;
+  }
+}
+
+/* Accessibility and Focus States */
+.cancelButton:focus,
+.confirmDeleteButton:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.5);
+  outline-offset: 2px;
+}

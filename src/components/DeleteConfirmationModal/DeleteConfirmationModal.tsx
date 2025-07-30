@@ -15,14 +15,18 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   return (
     <div className={s.modalOverlay}>
       <div className={s.deleteConfirmationModal}>
-        <h2>Видалити рецепт</h2>
-        <p>
-          Ви впевнені, що хочете видалити цей елемент? Цю дію неможливо
+        <h2 className={s.modalTitle}>Видалити рецепт</h2>
+        <p className={s.modalDescription}>
+          Ви впевнені, що хочете видалити цей рецепт? Цю дію неможливо
           скасувати.
         </p>
-        <div className={s.ModalButtons}>
-          <button onClick={onClose}>Скасувати</button>
-          <button onClick={onConfirmDelete}>Видалити</button>
+        <div className={s.modalButtons}>
+          <button className={s.cancelButton} onClick={onClose}>
+            Скасувати
+          </button>
+          <button className={s.confirmDeleteButton} onClick={onConfirmDelete}>
+            Видалити
+          </button>
         </div>
       </div>
     </div>
