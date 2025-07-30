@@ -19,6 +19,7 @@ const RecipePage: React.FC = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const {id} = useParams<{id: string}>();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // These are dummy states just to satisfy PageWrapper props
   const emptySetRecipes = () => {};
@@ -167,7 +168,10 @@ const RecipePage: React.FC = () => {
                     <FaRegPenToSquare />
                     Редагувати
                   </button>
-                  <button className={`${s.editButton} ${s.deleteButton}`}>
+                  <button
+                    className={`${s.editButton} ${s.deleteButton}`}
+                    onClick={() => setIsDeleteModalOpen(true)}
+                  >
                     <FaRegTrashCan />
                     Видалити
                   </button>
