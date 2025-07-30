@@ -24,6 +24,10 @@ const RecipePage: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  const isAdmin =
+    process.env.REACT_APP_SUPABASE_ADMIN_USER_ID ||
+    user?.role === 'authenticated';
+
   // These are dummy states just to satisfy PageWrapper props
   const emptySetRecipes = () => {};
   const [searchQuery] = useState('');
@@ -65,13 +69,7 @@ const RecipePage: React.FC = () => {
         if (data) {
           setRecipe(data);
           // Check if the current user is the owner of this recipe
-          console.log('Fetched recipe:', user);
-          console.log('Recipe owner ID:', data.user_id);
-          console.log('Current user ID:', user?.id);
-          const isAdminUser =
-            process.env.REACT_APP_SUPABASE_ADMIN_USER_ID ||
-            user?.role === 'authenticated';
-          if ((user && data.user_id === user.id) || isAdminUser) {
+          if ((user && data.user_id === user.id) || isAdmin) {
             setIsOwner(true);
           }
         } else {
@@ -153,7 +151,7 @@ const RecipePage: React.FC = () => {
         .from('recipes')
         .delete()
         .eq('id', id)
-        .eq('user_id', user.id);
+        .eq(isAdmin ? 'id' : 'user_id', isAdmin ? id : user.id);
       if (error) {
         throw error;
       }
