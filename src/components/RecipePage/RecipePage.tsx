@@ -11,6 +11,8 @@ import {BiCategory} from 'react-icons/bi';
 import {RiFileList3Line} from 'react-icons/ri';
 import {GoChecklist} from 'react-icons/go';
 import useWindowWidth from '../../hooks/useWindowWidth';
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
+import {useNavigate} from 'react-router-dom';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -20,6 +22,7 @@ const RecipePage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const {id} = useParams<{id: string}>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   // These are dummy states just to satisfy PageWrapper props
   const emptySetRecipes = () => {};
@@ -137,6 +140,26 @@ const RecipePage: React.FC = () => {
     );
   };
 
+  const handleDeleteRecipe = async () => {
+    if (!id || !user) return;
+    try {
+      const {error} = await supabase
+        .from('recipes')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user.id);
+      if (error) {
+        throw error;
+      }
+      navigate('/');
+    } catch (error) {
+      console.error('Error deleting recipe:', error);
+      setError('Failed to delete recipe');
+    } finally {
+      setIsDeleteModalOpen(false);
+    }
+  };
+
   const width = useWindowWidth();
 
   return (
@@ -224,6 +247,13 @@ const RecipePage: React.FC = () => {
           user={user}
           recipeToEdit={recipe}
           onRecipeUpdated={handleRecipeUpdated}
+        />
+
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onClose={() => setIsDeleteModalOpen(false)}
+          onConfirmDelete={handleDeleteRecipe}
         />
       </div>
     </PageWrapper>
