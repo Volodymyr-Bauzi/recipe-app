@@ -65,6 +65,9 @@ const RecipePage: React.FC = () => {
         if (data) {
           setRecipe(data);
           // Check if the current user is the owner of this recipe
+          console.log('Fetched recipe:', user);
+          console.log('Recipe owner ID:', data.user_id);
+          console.log('Current user ID:', user?.id);
           if (user && data.user_id === user.id) {
             setIsOwner(true);
           }
