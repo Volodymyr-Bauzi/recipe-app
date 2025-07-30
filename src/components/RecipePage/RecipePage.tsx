@@ -68,7 +68,10 @@ const RecipePage: React.FC = () => {
           console.log('Fetched recipe:', user);
           console.log('Recipe owner ID:', data.user_id);
           console.log('Current user ID:', user?.id);
-          if (user && data.user_id === user.id) {
+          const isAdminUser =
+            process.env.REACT_APP_SUPABASE_ADMIN_USER_ID ||
+            user?.role === 'authenticated';
+          if ((user && data.user_id === user.id) || isAdminUser) {
             setIsOwner(true);
           }
         } else {
