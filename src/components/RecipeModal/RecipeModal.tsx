@@ -43,7 +43,7 @@ function RecipeModal({
     description: '',
     ingredients: '',
     instructions: '',
-    cookingTime: '',
+    cooking_time: '',
     category: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,7 +71,7 @@ function RecipeModal({
       description: '',
       ingredients: '',
       instructions: '',
-      cookingTime: '',
+      cooking_time: '',
       category: '',
     });
   };
@@ -96,7 +96,7 @@ function RecipeModal({
         description: recipeToEdit.description || '',
         ingredients: recipeToEdit.ingredients || '',
         instructions: recipeToEdit.instructions || '',
-        cookingTime: recipeToEdit.cooking_time
+        cooking_time: recipeToEdit.cooking_time
           ? recipeToEdit.cooking_time.toString()
           : '',
         category: recipeToEdit.category || '',
@@ -113,7 +113,7 @@ function RecipeModal({
               description: parsed.description || '',
               ingredients: parsed.ingredients || '',
               instructions: parsed.instructions || '',
-              cookingTime: parsed.cookingTime || '',
+              cooking_time: parsed.cooking_time || '',
               category: parsed.category || '',
             });
           }
@@ -149,7 +149,7 @@ function RecipeModal({
 
       const recipeData = {
         ...form,
-        cooking_time: form.cookingTime ? parseInt(form.cookingTime) : null,
+        cooking_time: form.cooking_time ? parseInt(form.cooking_time) : null,
         user_id: currentUser.id,
       };
 
@@ -290,7 +290,7 @@ function RecipeModal({
         {/* Cooking Time */}
         <div className={styles.formGroup}>
           <label
-            htmlFor="cookingTime"
+            htmlFor="cooking_time"
             style={{
               fontSize: `${fontSize}px`,
               lineHeight: `${fontSize > 44 ? '40' : fontSize * 1.5}px`,
@@ -300,9 +300,9 @@ function RecipeModal({
             Час приготування (хвилини)
           </label>
           <input
-            id="cookingTime"
+            id="cooking_time"
             type="number"
-            value={form.cookingTime}
+            value={form.cooking_time}
             style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={handleChange}
             required
