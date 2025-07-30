@@ -24,9 +24,7 @@ const RecipePage: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const isAdmin =
-    process.env.REACT_APP_SUPABASE_ADMIN_USER_ID ||
-    user?.role === 'authenticated';
+  const isAdmin = user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
 
   // These are dummy states just to satisfy PageWrapper props
   const emptySetRecipes = () => {};
@@ -34,7 +32,7 @@ const RecipePage: React.FC = () => {
   const [selectedCategory] = useState<string | null>(null);
 
   // Check if the current user is the owner of the recipe
-  const [isOwner, setIsOwner] = useState(false);
+  const [canModify, setCanModify] = useState(false);
 
   // Fetch the current user
   useEffect(() => {
@@ -69,9 +67,11 @@ const RecipePage: React.FC = () => {
         if (data) {
           setRecipe(data);
           // Check if the current user is the owner of this recipe
-          if ((user && data.user_id === user.id) || isAdmin) {
-            setIsOwner(true);
-          }
+          const usercanModify = user && data.user_id === user.id;
+          const userIsAdmin =
+            user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
+
+          setCanModify(Boolean(usercanModify || userIsAdmin));
         } else {
           setError('Recipe not found');
         }
@@ -186,7 +186,7 @@ const RecipePage: React.FC = () => {
             <div className={s.recipeHeader}>
               <h1 className={s.recipeTitle}>{recipe.title}</h1>
 
-              {isOwner && (
+              {canModify && (
                 <>
                   <button
                     className={s.editButton}
