@@ -6,7 +6,7 @@ import PageWrapper from '../PageWrapper/PageWrapper';
 import {supabase} from '../../lib/supabaseClient';
 import RecipeModal from '../RecipeModal';
 import type {User} from '@supabase/supabase-js';
-import {FaRegPenToSquare, FaStopwatch} from 'react-icons/fa6';
+import {FaRegPenToSquare, FaRegTrashCan, FaStopwatch} from 'react-icons/fa6';
 import {BiCategory} from 'react-icons/bi';
 import {RiFileList3Line} from 'react-icons/ri';
 import {GoChecklist} from 'react-icons/go';
@@ -159,13 +159,19 @@ const RecipePage: React.FC = () => {
               <h1 className={s.recipeTitle}>{recipe.title}</h1>
 
               {isOwner && (
-                <button
-                  className={s.editButton}
-                  onClick={() => setIsEditModalOpen(true)}
-                >
-                  <FaRegPenToSquare />
-                  Редагувати
-                </button>
+                <>
+                  <button
+                    className={s.editButton}
+                    onClick={() => setIsEditModalOpen(true)}
+                  >
+                    <FaRegPenToSquare />
+                    Редагувати
+                  </button>
+                  <button className={`${s.editButton} ${s.deleteButton}`}>
+                    <FaRegTrashCan />
+                    Видалити
+                  </button>
+                </>
               )}
             </div>
 
