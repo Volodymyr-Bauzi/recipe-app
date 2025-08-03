@@ -6,4 +6,6 @@ export const krTranslations: TranslationKeys = {
   'recipe.minutes': '분',
   'recipe.ingredients': '재료',
   'recipe.noIngredients': '재료 없음',
+  'search.placeholder': '레시피 검색...',
+  'search.noResults': '"{{query}}"에 대한 결과 없음',
 };

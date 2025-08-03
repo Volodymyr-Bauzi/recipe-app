@@ -6,4 +6,6 @@ export const ukrTranslations: TranslationKeys = {
   'recipe.minutes': 'хв',
   'recipe.ingredients': 'Інгредієнти',
   'recipe.noIngredients': 'Немає інгредієнтів',
+  'search.placeholder': 'Шукати рецепт...',
+  'search.noResults': 'Немає результатів для "{{query}}"',
 };

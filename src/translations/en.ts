@@ -6,4 +6,6 @@ export const enTranslations: TranslationKeys = {
   'recipe.minutes': 'min',
   'recipe.ingredients': 'Ingredients',
   'recipe.noIngredients': 'No ingredients',
+  'search.placeholder': 'Search for a recipe...',
+  'search.noResults': 'No results for "{{query}}"',
 };

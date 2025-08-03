@@ -4,4 +4,6 @@ export interface TranslationKeys {
   'recipe.minutes': string;
   'recipe.ingredients': string;
   'recipe.noIngredients': string;
+  'search.placeholder': string;
+  'search.noResults': string;
 }

@@ -1,3 +1,4 @@
+import {useTranslation} from '../../hooks/useTranslation';
 import s from './SearchBar.module.css';
 
 interface SearchBarProps {
@@ -6,13 +7,15 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({query, onChange}) => {
+  const {t} = useTranslation();
+
   return (
     <section className={s.searchSection}>
       <input
         type="text"
         value={query}
         onChange={onChange}
-        placeholder="Шукати рецепт..."
+        placeholder={t('search.placeholder')}
         className={s.searchInput}
       />
     </section>

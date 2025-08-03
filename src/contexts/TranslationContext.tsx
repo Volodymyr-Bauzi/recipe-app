@@ -4,6 +4,7 @@ import {enTranslations} from '../translations/en';
 import {ukrTranslations} from '../translations/ukr';
 import type {TranslationKeys} from '../types/translations';
 import {krTranslations} from '../translations/kr';
+import {esTranslations} from '../translations/es'; // Assuming you have an esTranslations file
 
 type TFunction = (key: string, params?: Record<string, string>) => string;
 
@@ -29,6 +30,9 @@ const getTranslations = (locale: string): TranslationKeys => {
     case 'kr':
       return krTranslations;
     case 'ukr':
+      return ukrTranslations;
+    case 'es':
+      return esTranslations;
     default:
       return ukrTranslations;
   }
