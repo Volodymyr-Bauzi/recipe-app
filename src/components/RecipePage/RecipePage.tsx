@@ -13,6 +13,7 @@ import {GoChecklist} from 'react-icons/go';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import {useNavigate} from 'react-router-dom';
+import {useTranslation} from '../../hooks/useTranslation';
 
 const RecipePage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -23,6 +24,8 @@ const RecipePage: React.FC = () => {
   const {id} = useParams<{id: string}>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const {t} = useTranslation();
 
   const isAdmin = user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
 
@@ -174,13 +177,13 @@ const RecipePage: React.FC = () => {
     >
       <div className={s.recipePageContainer}>
         <Link to="/" className={s.backButton}>
-          ← Назад до рецептів
+          {t('recipe.backToList')}
         </Link>
 
         {loading ? (
-          <div className={s.loading}>Loading...</div>
+          <div className={s.loading}>{t('recipe.loading')}</div>
         ) : error || !recipe ? (
-          <div className={s.error}>{error || 'Recipe not found'}</div>
+          <div className={s.error}>{error || t('recipe.notFound')}</div>
         ) : (
           <div className={s.recipePage}>
             <div className={s.recipeHeader}>
@@ -193,14 +196,14 @@ const RecipePage: React.FC = () => {
                     onClick={() => setIsEditModalOpen(true)}
                   >
                     <FaRegPenToSquare />
-                    Редагувати
+                    {t('recipe.edit')}
                   </button>
                   <button
                     className={`${s.editButton} ${s.deleteButton}`}
                     onClick={() => setIsDeleteModalOpen(true)}
                   >
                     <FaRegTrashCan />
-                    Видалити
+                    {t('recipe.delete')}
                   </button>
                 </>
               )}
@@ -209,15 +212,15 @@ const RecipePage: React.FC = () => {
             <div className={s.recipeInfo}>
               <span className={s.recipeCategory}>
                 <BiCategory />
-                <strong>Категорія:</strong>
+                <strong>{t('recipe.category.label')}</strong>
                 &nbsp;
                 {recipe.category}
               </span>
               <span className={s.recipeCookingTime}>
                 <FaStopwatch />
-                <strong>Час приготування:</strong>
+                <strong>{t('recipe.cookingTime.label')}</strong>
                 &nbsp;
-                {recipe.cooking_time} хвилин
+                {recipe.cooking_time} {t('recipe.minutes.full')}
               </span>
             </div>
 
@@ -229,7 +232,7 @@ const RecipePage: React.FC = () => {
 
             <div className={s.recipeSection}>
               <h2 className={s.sectionTitle}>
-                <RiFileList3Line /> Інгредієнти:
+                <RiFileList3Line /> {t('recipe.ingredients.title')}:
               </h2>
               {formatIngredients()}
             </div>
@@ -237,7 +240,9 @@ const RecipePage: React.FC = () => {
             <div className={s.recipeSection}>
               <h2 className={s.sectionTitle}>
                 <GoChecklist />
-                {width < 426 ? ' Інструкції' : 'Інструкції з приготування:'}
+                {width < 426
+                  ? t('recipe.instructions.title.short')
+                  : t('recipe.instructions.title.full')}
               </h2>
               {formatInstructions()}
             </div>

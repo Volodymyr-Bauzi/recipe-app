@@ -6,8 +6,54 @@ export const ukrTranslations: TranslationKeys = {
   'recipe.minutes': 'хв',
   'recipe.ingredients': 'Інгредієнти',
   'recipe.noIngredients': 'Немає інгредієнтів',
-  'search.placeholder': 'Шукати рецепт...',
   'recipe.title': 'Рецепти',
   'recipe.noResults': 'Рецептів не знайдено',
+  'recipe.add': 'Додати рецепт',
+  'recipe.edit': 'Редагувати рецепт',
+  'recipe.enterTitle': 'Введіть назву рецепту',
+
+  'search.placeholder': 'Шукати рецепт...',
   'search.noResults': 'Немає результатів для "{{query}}"',
+
+  'recipe.form.title.label': 'Назва рецепту',
+  'recipe.form.title.placeholder': 'Введіть назву рецепту',
+
+  'recipe.form.category.label': 'Категорія',
+  'recipe.form.category.placeholder': 'Виберіть категорію',
+
+  'recipe.form.description.label': 'Опис',
+  'recipe.form.description.placeholder': 'Короткий опис рецепту',
+
+  'recipe.form.ingredients.label': 'Інгредієнти',
+  'recipe.form.ingredients.placeholder':
+    'Введіть інгредієнти (по одному на рядок)',
+
+  'recipe.form.instructions.label': 'Інструкції',
+  'recipe.form.instructions.placeholder': 'Введіть інструкції з приготування',
+
+  'recipe.form.cookingTime.label': 'Час приготування (хвилини)',
+  'recipe.form.cookingTime.placeholder': 'Введіть час приготування в хвилинах',
+
+  'recipe.form.button.cancel': 'Скасувати',
+  'recipe.form.button.add': 'Додати рецепт',
+  'recipe.form.button.update': 'Оновити рецепт',
+  'recipe.form.button.adding': 'Додавання...',
+  'recipe.form.button.updating': 'Оновлення...',
+
+  'recipe.backToList': 'Назад до рецептів',
+
+  'recipe.loading': 'Завантаження...',
+  'recipe.error': 'Сталася помилка',
+  'recipe.notFound': 'Рецепт не знайдено',
+
+  'recipe.delete': 'Видалити рецепт',
+
+  'recipe.category.label': 'Категорія:',
+  'recipe.cookingTime.label': 'Час приготування:',
+
+  'recipe.ingredients.title': 'Інгредієнти:',
+  'recipe.instructions.title.short': 'Інструкції',
+  'recipe.instructions.title.full': 'Інструкції з приготування:',
+
+  'recipe.minutes.full': 'хвилин',
 };

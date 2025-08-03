@@ -5,6 +5,7 @@ import type {Recipe} from '../../types';
 import ModalWrapper from '../ModalWrapper';
 import styles from './RecipeModal.module.css';
 import FontSizeChanger from '../FontSizeChanger';
+import {useTranslation} from '../../hooks/useTranslation';
 
 interface RecipeModalProps {
   isOpen: boolean;
@@ -52,6 +53,8 @@ function RecipeModal({
     const stored = localStorage.getItem(LOCAL_FONT_SIZE_KEY);
     return stored ? parseInt(stored, 10) || 16 : 16;
   });
+
+  const {t} = useTranslation();
 
   const isEditMode = !!recipeToEdit;
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -187,7 +190,7 @@ function RecipeModal({
   return (
     <ModalWrapper
       isOpen={isOpen}
-      title={isEditMode ? 'Редагувати рецепт' : 'Додати новий рецепт'}
+      title={isEditMode ? t('recipe.edit') : t('recipe.add')}
       onClose={onClose}
     >
       <FontSizeChanger onFontSizeChange={setFontSize} />
@@ -204,7 +207,7 @@ function RecipeModal({
               marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
             }}
           >
-            Назва рецепту
+            {t('recipe.form.title.label')}
           </label>
           <input
             id="title"
@@ -213,14 +216,14 @@ function RecipeModal({
             value={form.title}
             onChange={handleChange}
             required
-            placeholder="Введіть назву рецепту"
+            placeholder={t('recipe.form.title.placeholder')}
           />
         </div>
 
         {/* Category */}
         <div className={styles.formGroup}>
           <label htmlFor="category" style={{fontSize: `${fontSize}px`}}>
-            Категорія
+            {t('recipe.form.category.label')}
           </label>
           <select
             id="category"
@@ -230,7 +233,7 @@ function RecipeModal({
             required
             className={styles.select}
           >
-            <option value="">Виберіть категорію</option>
+            <option value="">{t('recipe.form.category.placeholder')}</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
@@ -242,7 +245,7 @@ function RecipeModal({
         {/* Description */}
         <div className={styles.formGroup}>
           <label htmlFor="description" style={{fontSize: `${fontSize}px`}}>
-            Опис
+            {t('recipe.form.description.label')}
           </label>
           <textarea
             id="description"
@@ -250,7 +253,7 @@ function RecipeModal({
             style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={handleChange}
             required
-            placeholder="Короткий опис рецепту"
+            placeholder={t('recipe.form.description.placeholder')}
             rows={3}
           />
         </div>
@@ -258,7 +261,7 @@ function RecipeModal({
         {/* Ingredients */}
         <div className={styles.formGroup}>
           <label htmlFor="ingredients" style={{fontSize: `${fontSize}px`}}>
-            Інгредієнти
+            {t('recipe.form.ingredients.label')}
           </label>
           <textarea
             id="ingredients"
@@ -266,7 +269,7 @@ function RecipeModal({
             style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={handleChange}
             required
-            placeholder="Введіть інгредієнти (по одному на рядок)"
+            placeholder={t('recipe.form.ingredients.placeholder')}
             rows={5}
           />
         </div>
@@ -274,7 +277,7 @@ function RecipeModal({
         {/* Instructions */}
         <div className={styles.formGroup}>
           <label htmlFor="instructions" style={{fontSize: `${fontSize}px`}}>
-            Інструкції
+            {t('recipe.form.instructions.label')}
           </label>
           <textarea
             id="instructions"
@@ -282,7 +285,7 @@ function RecipeModal({
             style={{fontSize: `${fontSize > 30 ? '24' : fontSize}px`}}
             onChange={handleChange}
             required
-            placeholder="Введіть інструкції з приготування"
+            placeholder={t('recipe.form.instructions.placeholder')}
             rows={5}
           />
         </div>
@@ -297,7 +300,7 @@ function RecipeModal({
               marginBottom: `${fontSize > 44 ? '16px' : '6px'}`,
             }}
           >
-            Час приготування (хвилини)
+            {t('recipe.form.cookingTime.label')}
           </label>
           <input
             id="cooking_time"
@@ -307,7 +310,7 @@ function RecipeModal({
             onChange={handleChange}
             required
             min="1"
-            placeholder="Введіть час приготування в хвилинах"
+            placeholder={t('recipe.form.cookingTime.placeholder')}
           />
         </div>
 
@@ -320,7 +323,7 @@ function RecipeModal({
             disabled={isSubmitting}
             style={{fontSize: `${fontSize > 24 ? '24' : fontSize}px`}}
           >
-            Скасувати
+            {t('recipe.form.button.cancel')}
           </button>
           <button
             type="submit"
@@ -330,11 +333,11 @@ function RecipeModal({
           >
             {isSubmitting
               ? isEditMode
-                ? 'Оновлення...'
-                : 'Додавання...'
+                ? t('recipe.form.button.updating')
+                : t('recipe.form.button.adding')
               : isEditMode
-              ? 'Оновити рецепт'
-              : 'Додати рецепт'}
+              ? t('recipe.form.button.update')
+              : t('recipe.form.button.add')}
           </button>
         </div>
       </form>
