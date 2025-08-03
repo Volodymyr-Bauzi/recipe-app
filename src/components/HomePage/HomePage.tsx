@@ -23,7 +23,13 @@ const HomePage = () => {
 
   // Handle category selection
   const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category === selectedCategory ? null : category);
+    setSelectedCategory(
+      category === selectedCategory
+        ? category === 'all'
+          ? null
+          : category
+        : category
+    );
   };
 
   return (

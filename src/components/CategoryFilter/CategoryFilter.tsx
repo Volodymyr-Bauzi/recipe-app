@@ -13,7 +13,6 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   const {t} = useTranslation();
 
   const categories = [
-    t('categories.all'),
     t('categories.mainDishes'),
     t('categories.soups'),
     t('categories.sides'),
@@ -30,6 +29,12 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     <section className={s.categoriesSection}>
       <h2 className={s.sectionTitle}>{t('categories.title')}</h2>
       <ul className={s.categoriesList}>
+        <li
+          className={`${s.categoryItem} ${selected === 'all' ? s.active : ''}`}
+          onClick={() => onSelect('all')}
+        >
+          {t('categories.all')}
+        </li>
         {categories.map((category) => (
           <li
             key={category}
