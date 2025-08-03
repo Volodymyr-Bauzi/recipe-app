@@ -42,4 +42,11 @@ export interface TranslationKeys {
   'recipe.instructions.title.short': string;
   'recipe.instructions.title.full': string;
   'recipe.minutes.full': string;
+
+  'header.title': string;
+  'header.addRecipe': string;
+  'header.loginToAdd': string;
+  'header.loginOrRegister': string;
+  'header.logout': string;
+  'header.userAvatarAlt': string;
 }

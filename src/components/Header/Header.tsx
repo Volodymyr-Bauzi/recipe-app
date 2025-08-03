@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import {supabase} from '../../lib/supabaseClient';
 import AuthModal from '../AuthModal/AuthModal';
 import s from './Header.module.css';
+import {useTranslation} from '../../hooks/useTranslation';
 
 interface HeaderProps {
   onAddRecipeClick: () => void;
@@ -14,6 +15,8 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
 
   const [authOpen, setAuthOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(false);
+
+  const {t} = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +52,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           <button className={s.toggleNavBarButton} onClick={toggleMenu}>
             ☰
           </button>
-          <h1 className={s.headerTitle}>Домашні Рецепти</h1>
+          <h1 className={s.headerTitle}>{t('header.title')}</h1>
         </div>
 
         <div className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}>
@@ -57,16 +60,20 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
             className={s.addButton}
             onClick={user ? onAddRecipeClick : () => setAuthOpen(true)}
           >
-            {user ? 'Додати новий рецепт' : 'Увійдіть, щоб додати рецепт'}
+            {user ? t('header.addRecipe') : t('header.loginToAdd')}
           </button>
 
           <div className={s.authButtons}>
             {user ? (
               <div className={s.userInfo}>
-                <img src={avatarUrl} alt="User Avatar" className={s.avatar} />
+                <img
+                  src={avatarUrl}
+                  alt={t('header.userAvatarAlt')}
+                  className={s.avatar}
+                />
                 <span className={s.userName}>{userName}</span>
                 <button className={s.logoutBtn} onClick={handleLogout}>
-                  Вийти
+                  {t('header.logout')}
                 </button>
               </div>
             ) : (
@@ -74,7 +81,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
                 onClick={() => setAuthOpen(true)}
                 className={s.authButton}
               >
-                Увійти / Зареєструватися
+                {t('header.loginOrRegister')}
               </button>
             )}
           </div>
