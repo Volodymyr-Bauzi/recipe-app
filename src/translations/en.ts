@@ -49,4 +49,7 @@ export const enTranslations: TranslationKeys = {
   'header.loginOrRegister': 'Log in / Register',
   'header.logout': 'Log out',
   'header.userAvatarAlt': 'User Avatar',
+
+  'footer.title': 'Delicious Recipes',
+  'footer.rights': 'All rights reserved',
 };

@@ -52,4 +52,7 @@ export const ukrTranslations: TranslationKeys = {
   'header.loginOrRegister': 'Увійти / Зареєструватися',
   'header.logout': 'Вийти',
   'header.userAvatarAlt': 'Аватар користувача',
+
+  'footer.title': 'Смачні Рецепти',
+  'footer.rights': 'Всі права захищені',
 };

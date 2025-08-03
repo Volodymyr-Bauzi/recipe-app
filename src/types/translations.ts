@@ -49,4 +49,7 @@ export interface TranslationKeys {
   'header.loginOrRegister': string;
   'header.logout': string;
   'header.userAvatarAlt': string;
+
+  'footer.title': string;
+  'footer.rights': string;
 }

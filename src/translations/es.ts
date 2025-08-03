@@ -51,4 +51,7 @@ export const esTranslations: TranslationKeys = {
   'header.loginOrRegister': 'Iniciar sesión / Registrarse',
   'header.logout': 'Cerrar sesión',
   'header.userAvatarAlt': 'Avatar del usuario',
+
+  'footer.title': 'Recetas Deliciosas',
+  'footer.rights': 'Todos los derechos reservados',
 };

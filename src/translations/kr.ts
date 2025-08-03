@@ -49,4 +49,7 @@ export const krTranslations: TranslationKeys = {
   'header.loginOrRegister': '로그인 / 회원가입',
   'header.logout': '로그아웃',
   'header.userAvatarAlt': '사용자 아바타',
+
+  'footer.title': '맛있는 레시피',
+  'footer.rights': '모든 권리 보유',
 };
