@@ -14,8 +14,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
   const categories = [
     t('categories.all'),
-    t('categories.desserts'),
     t('categories.mainDishes'),
+    t('categories.desserts'),
     t('categories.salads'),
     t('categories.soups'),
     t('categories.beverages'),
