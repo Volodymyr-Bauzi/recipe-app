@@ -63,4 +63,18 @@ export const ukrTranslations: TranslationKeys = {
     'Ви впевнені, що хочете видалити цей рецепт? Цю дію неможливо скасувати.',
   'modal.cancel': 'Скасувати',
   'modal.delete': 'Видалити',
+
+  'categories.title': 'Категорії', // New key for category title
+  'categories.all': 'Всі категорії',
+  'categories.desserts': 'Десерти',
+  'categories.mainDishes': 'Основні страви',
+  'categories.salads': 'Салати',
+  'categories.soups': 'Супи',
+  'categories.beverages': 'Напої',
+  'categories.snacks': 'Закуски',
+  'categories.baking': 'Випічка',
+  'categories.meats': "М'ясні страви",
+  'categories.preserves': 'Закрутки',
+  'categories.sides': 'Гарніри',
+  'categories.pizza': 'Піца',
 };

@@ -4,11 +4,11 @@ export interface TranslationKeys {
   'recipe.minutes': string;
   'recipe.ingredients': string;
   'recipe.noIngredients': string;
-  'recipe.title'?: string; // Optional for languages that may not have this key
-  'recipe.noResults'?: string; // Optional for languages that may not have this key
-  'recipe.add'?: string; // Optional for languages that may not have this key
-  'recipe.edit'?: string; // Optional for languages that may not have this key
-  'recipe.enterTitle'?: string; // Optional for languages that may not have this key
+  'recipe.title': string;
+  'recipe.noResults': string;
+  'recipe.add': string;
+  'recipe.edit': string;
+  'recipe.enterTitle': string;
 
   'search.placeholder': string;
   'search.noResults': string;
@@ -59,4 +59,18 @@ export interface TranslationKeys {
   'modal.deleteRecipe.description': string;
   'modal.cancel': string;
   'modal.delete': string;
+
+  'categories.title': string;
+  'categories.all': string;
+  'categories.desserts': string;
+  'categories.mainDishes': string;
+  'categories.salads': string;
+  'categories.soups': string;
+  'categories.beverages': string;
+  'categories.snacks': string;
+  'categories.baking': string;
+  'categories.meats': string;
+  'categories.preserves': string;
+  'categories.sides': string;
+  'categories.pizza': string;
 }

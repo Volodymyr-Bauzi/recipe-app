@@ -60,4 +60,18 @@ export const enTranslations: TranslationKeys = {
     'Are you sure you want to delete this recipe?',
   'modal.cancel': 'Cancel',
   'modal.delete': 'Delete',
+
+  'categories.title': 'Categories', // New key for category title
+  'categories.all': 'All',
+  'categories.desserts': 'Desserts',
+  'categories.mainDishes': 'Main Dishes',
+  'categories.salads': 'Salads',
+  'categories.soups': 'Soups',
+  'categories.beverages': 'Beverages',
+  'categories.snacks': 'Snacks',
+  'categories.baking': 'Baking',
+  'categories.meats': 'Meats',
+  'categories.preserves': 'Preserves',
+  'categories.sides': 'Sides',
+  'categories.pizza': 'Pizza',
 };

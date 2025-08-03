@@ -62,4 +62,18 @@ export const esTranslations: TranslationKeys = {
     '¿Está seguro de que desea eliminar esta receta? Esta acción no se puede deshacer.',
   'modal.cancel': 'Cancelar',
   'modal.delete': 'Eliminar',
+
+  'categories.title': 'Categorías', // New key for category title
+  'categories.all': 'Todas',
+  'categories.desserts': 'Postres',
+  'categories.mainDishes': 'Platos principales',
+  'categories.salads': 'Ensaladas',
+  'categories.soups': 'Sopas',
+  'categories.beverages': 'Bebidas',
+  'categories.snacks': 'Aperitivos',
+  'categories.baking': 'Repostería',
+  'categories.meats': 'Carnes',
+  'categories.preserves': 'Conservas',
+  'categories.sides': 'Guarniciones',
+  'categories.pizza': 'Pizza',
 };

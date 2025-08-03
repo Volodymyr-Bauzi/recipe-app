@@ -59,4 +59,18 @@ export const krTranslations: TranslationKeys = {
   'modal.deleteRecipe.description': '이 레시피를 정말 삭제하시겠습니까?',
   'modal.cancel': '취소',
   'modal.delete': '삭제',
+
+  'categories.title': '카테고리',
+  'categories.all': '모두',
+  'categories.desserts': '디저트',
+  'categories.mainDishes': '메인 요리',
+  'categories.salads': '샐러드',
+  'categories.soups': '수프',
+  'categories.beverages': '음료',
+  'categories.snacks': '간식',
+  'categories.baking': '베이킹',
+  'categories.meats': '육류',
+  'categories.preserves': '절임',
+  'categories.sides': '사이드 요리',
+  'categories.pizza': '피자',
 };
