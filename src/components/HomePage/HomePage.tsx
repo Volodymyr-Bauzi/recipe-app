@@ -22,14 +22,12 @@ const HomePage = () => {
   };
 
   // Handle category selection
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(
-      category === selectedCategory
-        ? category === 'all'
-          ? null
-          : category
-        : category
-    );
+  const handleCategorySelect = (category: string, all = false) => {
+    if (all) {
+      setSelectedCategory(null);
+      return;
+    }
+    setSelectedCategory(category === selectedCategory ? null : category);
   };
 
   return (

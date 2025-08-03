@@ -3,7 +3,7 @@ import s from './CategoryFilter.module.css';
 
 interface CategoryFilterProps {
   selected: string | null;
-  onSelect: (category: string) => void;
+  onSelect: (category: string, all?: boolean) => void;
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -31,7 +31,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       <ul className={s.categoriesList}>
         <li
           className={`${s.categoryItem} ${selected === 'all' ? s.active : ''}`}
-          onClick={() => onSelect('all')}
+          onClick={() => onSelect('all', true)}
         >
           {t('categories.all')}
         </li>
