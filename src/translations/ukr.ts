@@ -7,5 +7,7 @@ export const ukrTranslations: TranslationKeys = {
   'recipe.ingredients': 'Інгредієнти',
   'recipe.noIngredients': 'Немає інгредієнтів',
   'search.placeholder': 'Шукати рецепт...',
+  'recipe.title': 'Рецепти',
+  'recipe.noResults': 'Рецептів не знайдено',
   'search.noResults': 'Немає результатів для "{{query}}"',
 };

@@ -5,11 +5,14 @@ import PageWrapper from '../PageWrapper';
 import RecipeCard from '../RecipeCard';
 import SearchBar from '../SearchBar';
 import CategoryFilter from '../CategoryFilter';
+import {useTranslation} from '../../hooks/useTranslation';
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const {t} = useTranslation();
 
   // Fetch recipes function
 
@@ -36,14 +39,14 @@ const HomePage = () => {
       />
 
       <section className={s.recipesSection}>
-        <h2 className={s.sectionTitle}>Рецепти</h2>
+        <h2 className={s.sectionTitle}>{t('recipe.title')}</h2>
         <div className={s.recipesGrid}>
           {recipes.length > 0 ? (
             recipes.map((recipe) => (
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))
           ) : (
-            <p className={s.noRecipes}>Рецептів не знайдено</p>
+            <p className={s.noRecipes}>{t('recipe.noResults')}</p>
           )}
         </div>
       </section>
