@@ -54,4 +54,10 @@ export const enTranslations: TranslationKeys = {
   'footer.rights': 'All rights reserved',
 
   'fontSizeChanger.changeFontSize': 'Change font size', // New key for font size changer
+
+  'modal.deleteRecipe.title': 'Delete recipe',
+  'modal.deleteRecipe.description':
+    'Are you sure you want to delete this recipe?',
+  'modal.cancel': 'Cancel',
+  'modal.delete': 'Delete',
 };

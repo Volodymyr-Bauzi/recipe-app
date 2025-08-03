@@ -1,3 +1,4 @@
+import {useTranslation} from '../../hooks/useTranslation';
 import s from './DeleteConfirmationModal.module.css';
 
 interface DeleteConfirmationModalProps {
@@ -11,21 +12,22 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   onClose,
   onConfirmDelete,
 }) => {
+  const {t} = useTranslation();
   if (!isOpen) return null;
+
   return (
     <div className={s.modalOverlay}>
       <div className={s.deleteConfirmationModal}>
-        <h2 className={s.modalTitle}>Видалити рецепт</h2>
+        <h2 className={s.modalTitle}>{t('modal.deleteRecipe.title')}</h2>
         <p className={s.modalDescription}>
-          Ви впевнені, що хочете видалити цей рецепт? Цю дію неможливо
-          скасувати.
+          {t('modal.deleteRecipe.description')}
         </p>
         <div className={s.modalButtons}>
           <button className={s.cancelButton} onClick={onClose}>
-            Скасувати
+            {t('modal.cancel')}
           </button>
           <button className={s.confirmDeleteButton} onClick={onConfirmDelete}>
-            Видалити
+            {t('modal.delete')}
           </button>
         </div>
       </div>

@@ -54,4 +54,9 @@ export const krTranslations: TranslationKeys = {
   'footer.rights': '모든 권리 보유',
 
   'fontSizeChanger.changeFontSize': '글꼴 크기 변경', // New key for font size changer
+
+  'modal.deleteRecipe.title': '레시피 삭제',
+  'modal.deleteRecipe.description': '이 레시피를 정말 삭제하시겠습니까?',
+  'modal.cancel': '취소',
+  'modal.delete': '삭제',
 };

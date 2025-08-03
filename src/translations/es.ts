@@ -56,4 +56,10 @@ export const esTranslations: TranslationKeys = {
   'footer.rights': 'Todos los derechos reservados',
 
   'fontSizeChanger.changeFontSize': 'Cambiar tamaño de fuente', // New key for font size changer
+
+  'modal.deleteRecipe.title': 'Eliminar receta',
+  'modal.deleteRecipe.description':
+    '¿Está seguro de que desea eliminar esta receta? Esta acción no se puede deshacer.',
+  'modal.cancel': 'Cancelar',
+  'modal.delete': 'Eliminar',
 };

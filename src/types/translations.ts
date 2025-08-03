@@ -53,5 +53,10 @@ export interface TranslationKeys {
   'footer.title': string;
   'footer.rights': string;
 
-  'fontSizeChanger.changeFontSize': string; // New key for font size changer
+  'fontSizeChanger.changeFontSize': string;
+
+  'modal.deleteRecipe.title': string;
+  'modal.deleteRecipe.description': string;
+  'modal.cancel': string;
+  'modal.delete': string;
 }

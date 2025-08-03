@@ -57,4 +57,10 @@ export const ukrTranslations: TranslationKeys = {
   'footer.rights': 'Всі права захищені',
 
   'fontSizeChanger.changeFontSize': 'Змінити розмір шрифту',
+
+  'modal.deleteRecipe.title': 'Видалити рецепт',
+  'modal.deleteRecipe.description':
+    'Ви впевнені, що хочете видалити цей рецепт? Цю дію неможливо скасувати.',
+  'modal.cancel': 'Скасувати',
+  'modal.delete': 'Видалити',
 };
