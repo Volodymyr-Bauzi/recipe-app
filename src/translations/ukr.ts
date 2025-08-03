@@ -55,4 +55,6 @@ export const ukrTranslations: TranslationKeys = {
 
   'footer.title': 'Смачні Рецепти',
   'footer.rights': 'Всі права захищені',
+
+  'fontSizeChanger.changeFontSize': 'Змінити розмір шрифту',
 };

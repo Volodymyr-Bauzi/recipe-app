@@ -52,4 +52,6 @@ export const enTranslations: TranslationKeys = {
 
   'footer.title': 'Delicious Recipes',
   'footer.rights': 'All rights reserved',
+
+  'fontSizeChanger.changeFontSize': 'Change font size', // New key for font size changer
 };

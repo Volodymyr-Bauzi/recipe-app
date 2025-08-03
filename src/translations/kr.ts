@@ -52,4 +52,6 @@ export const krTranslations: TranslationKeys = {
 
   'footer.title': '맛있는 레시피',
   'footer.rights': '모든 권리 보유',
+
+  'fontSizeChanger.changeFontSize': '글꼴 크기 변경', // New key for font size changer
 };

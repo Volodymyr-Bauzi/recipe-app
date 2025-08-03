@@ -54,4 +54,6 @@ export const esTranslations: TranslationKeys = {
 
   'footer.title': 'Recetas Deliciosas',
   'footer.rights': 'Todos los derechos reservados',
+
+  'fontSizeChanger.changeFontSize': 'Cambiar tamaño de fuente', // New key for font size changer
 };

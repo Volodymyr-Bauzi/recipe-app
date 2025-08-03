@@ -52,4 +52,6 @@ export interface TranslationKeys {
 
   'footer.title': string;
   'footer.rights': string;
+
+  'fontSizeChanger.changeFontSize': string; // New key for font size changer
 }
