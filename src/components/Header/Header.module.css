@@ -101,18 +101,30 @@
   background-color: #ffcc80;
   border: 3px solid grey;
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-weight: bold;
   color: #555;
+  position: relative;
 }
 
+/* Hover effect matching buttons */
 .languageSwitcher:hover {
   background-color: #e6b800;
   border-color: black;
 }
 
+/* Custom arrow for dropdown */
+.languageSwitcher::after {
+  content: '▼';
+  font-size: 0.6rem;
+  margin-left: 5px;
+  color: #555;
+  pointer-events: none;
+}
+
+/* The select element itself */
 .languageSelect {
   background: transparent;
   border: none;
@@ -123,13 +135,13 @@
   outline: none;
   appearance: none;
   padding: 2px 5px;
+  display: flex;
+  align-items: center;
 }
 
-.languageSwitcher::after {
-  content: '▼';
-  font-size: 0.6rem;
-  margin-left: 5px;
-  color: #555;
+/* Optional: Flag spacing in options (works in Chrome/Firefox) */
+.languageSelect option {
+  padding-left: 0.5rem;
 }
 
 @media (max-width: 1200px) {

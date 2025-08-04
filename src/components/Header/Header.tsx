@@ -68,7 +68,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
 
           <div className={s.languageSwitcher}>
             <select
-              value={'🔽' + locale}
+              value={locale}
               onChange={(e) =>
                 setLocale(
                   (e.target as HTMLSelectElement).value as AvailableLanguageCode
