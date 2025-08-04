@@ -77,4 +77,18 @@ export const ukrTranslations: TranslationKeys = {
   'categories.preserves': 'Закрутки',
   'categories.sides': 'Гарніри',
   'categories.pizza': 'Піца',
+
+  'auth.signInTitle': 'Увійти',
+  'auth.signUpTitle': 'Зареєструватися',
+  'auth.googleButton': '🟢 Продовжити з Google',
+  'auth.or': 'або',
+  'auth.emailPlaceholder': 'Email',
+  'auth.passwordPlaceholder': 'Пароль',
+  'auth.signInButton': 'Увійти',
+  'auth.signUpButton': 'Зареєструватися',
+  'auth.noAccount': 'Немає акаунту?',
+  'auth.haveAccount': 'Вже є акаунт?',
+  'auth.registerLink': 'Зареєструватися',
+  'auth.loginLink': 'Увійти',
+  'auth.successMessage': 'Успішно! Перевірте пошту або увійдіть.',
 };

@@ -74,4 +74,18 @@ export const enTranslations: TranslationKeys = {
   'categories.preserves': 'Preserves',
   'categories.sides': 'Sides',
   'categories.pizza': 'Pizza',
+
+  'auth.signInTitle': 'Sign In',
+  'auth.signUpTitle': 'Sign Up',
+  'auth.googleButton': '🟢 Continue with Google',
+  'auth.or': 'or',
+  'auth.emailPlaceholder': 'Email',
+  'auth.passwordPlaceholder': 'Password',
+  'auth.signInButton': 'Sign In',
+  'auth.signUpButton': 'Sign Up',
+  'auth.noAccount': 'No account?',
+  'auth.haveAccount': 'Have an account?',
+  'auth.registerLink': 'Register',
+  'auth.loginLink': 'Login',
+  'auth.successMessage': 'Successfully logged in!',
 };

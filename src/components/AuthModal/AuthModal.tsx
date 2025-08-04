@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {supabase} from '../../lib/supabaseClient';
 import ModalWrapper from '../ModalWrapper';
 import s from './AuthModal.module.css';
+import {useTranslation} from '../../hooks/useTranslation';
 
 export default function AuthModal({
   isOpen,
@@ -16,6 +17,8 @@ export default function AuthModal({
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  const {t} = useTranslation();
+
   const handleAuth = async () => {
     setMessage('');
     const method =
@@ -28,7 +31,7 @@ export default function AuthModal({
     if (error) {
       setMessage(error.message);
     } else {
-      setMessage('Успішно! Перевірте пошту або увійдіть.');
+      setMessage(t('auth.successMessage'));
       onClose();
     }
   };
@@ -44,46 +47,46 @@ export default function AuthModal({
   return (
     <ModalWrapper
       isOpen={isOpen}
-      title={mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
+      title={mode === 'signIn' ? t('auth.signInTitle') : t('auth.signUpTitle')}
       onClose={onClose}
     >
       <button className={s.googleButton} onClick={handleGoogleLogin}>
-        🟢 Продовжити з Google
+        {t('auth.googleButton')}
       </button>
 
-      <div className={s.divider}>або</div>
+      <div className={s.divider}>{t('auth.or')}</div>
 
       <input
         className={s.input}
         type="email"
-        placeholder="Email"
+        placeholder={t('auth.emailPlaceholder')}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         className={s.input}
         type="password"
-        placeholder="Пароль"
+        placeholder={t('auth.passwordPlaceholder')}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <button className={s.submitButton} onClick={handleAuth}>
-        {mode === 'signIn' ? 'Увійти' : 'Зареєструватися'}
+        {mode === 'signIn' ? t('auth.signInButton') : t('auth.signUpButton')}
       </button>
 
       <p className={s.toggleText}>
         {mode === 'signIn' ? (
           <>
-            Немає акаунту?
+            {t('auth.noAccount')}
             <span className={s.toggleLink} onClick={() => setMode('signUp')}>
-              Зареєструватися
+              {t('auth.registerLink')}
             </span>
           </>
         ) : (
           <>
-            Вже є акаунт?
+            {t('auth.haveAccount')}
             <span className={s.toggleLink} onClick={() => setMode('signIn')}>
-              Увійти
+              {t('auth.loginLink')}
             </span>
           </>
         )}

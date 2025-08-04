@@ -73,4 +73,18 @@ export const krTranslations: TranslationKeys = {
   'categories.preserves': '절임',
   'categories.sides': '사이드 요리',
   'categories.pizza': '피자',
+
+  'auth.signInTitle': '로그인',
+  'auth.signUpTitle': '회원가입',
+  'auth.googleButton': '🟢 Google로 계속하기',
+  'auth.or': '또는',
+  'auth.emailPlaceholder': '이메일',
+  'auth.passwordPlaceholder': '비밀번호',
+  'auth.signInButton': '로그인',
+  'auth.signUpButton': '회원가입',
+  'auth.noAccount': '계정이 없으신가요?',
+  'auth.haveAccount': '계정이 있으신가요?',
+  'auth.registerLink': '회원가입',
+  'auth.loginLink': '로그인',
+  'auth.successMessage': '성공적으로 로그인했습니다!',
 };

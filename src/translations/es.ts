@@ -76,4 +76,18 @@ export const esTranslations: TranslationKeys = {
   'categories.preserves': 'Conservas',
   'categories.sides': 'Guarniciones',
   'categories.pizza': 'Pizza',
+
+  'auth.signInTitle': 'Iniciar sesión',
+  'auth.signUpTitle': 'Registrarse',
+  'auth.googleButton': '🟢 Continuar con Google',
+  'auth.or': 'o',
+  'auth.emailPlaceholder': 'Correo electrónico',
+  'auth.passwordPlaceholder': 'Contraseña',
+  'auth.signInButton': 'Iniciar sesión',
+  'auth.signUpButton': 'Registrarse',
+  'auth.noAccount': '¿No tienes una cuenta?',
+  'auth.haveAccount': '¿Ya tienes una cuenta?',
+  'auth.registerLink': 'Registrarse',
+  'auth.loginLink': 'Iniciar sesión',
+  'auth.successMessage': '¡Has iniciado sesión con éxito!',
 };

@@ -73,4 +73,18 @@ export interface TranslationKeys {
   'categories.preserves': string;
   'categories.sides': string;
   'categories.pizza': string;
+
+  'auth.signInTitle': string;
+  'auth.signUpTitle': string;
+  'auth.googleButton': string;
+  'auth.or': string;
+  'auth.emailPlaceholder': string;
+  'auth.passwordPlaceholder': string;
+  'auth.signInButton': string;
+  'auth.signUpButton': string;
+  'auth.noAccount': string;
+  'auth.haveAccount': string;
+  'auth.registerLink': string;
+  'auth.loginLink': string;
+  'auth.successMessage': string;
 }
