@@ -9,6 +9,7 @@ export type AvailableLanguageCode = 'ukr' | 'en' | 'kr' | 'es';
 export interface LanguageOption {
   code: AvailableLanguageCode | string;
   label: string;
+  flag: string;
 }
 
 export const translations: Record<AvailableLanguageCode, TranslationKeys> = {
@@ -19,8 +20,8 @@ export const translations: Record<AvailableLanguageCode, TranslationKeys> = {
 };
 
 export const availableLanguages: LanguageOption[] = [
-  {code: 'ukr', label: 'Українська'},
-  {code: 'en', label: 'English'},
-  {code: 'kr', label: '한국어'},
-  {code: 'es', label: 'Español'},
+  {code: 'ukr', label: 'Українська', flag: '🇺🇦'},
+  {code: 'en', label: 'English', flag: '🇬🇧'},
+  {code: 'kr', label: '한국어', flag: '🇰🇷'},
+  {code: 'es', label: 'Español', flag: '🇪🇸'},
 ];

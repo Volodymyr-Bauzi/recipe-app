@@ -92,6 +92,7 @@ export interface TranslationKeys {
 export interface LanguageOption {
   code: string;
   label: string;
+  flag: string;
 }
 
 export type TranslationRecord = Record<keyof TranslationKeys, string>;

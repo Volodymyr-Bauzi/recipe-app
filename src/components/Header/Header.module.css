@@ -63,7 +63,8 @@
 .logoutBtn,
 .authButton,
 .addButton,
-.toggleNavBarButton {
+.toggleNavBarButton,
+.languageSwitcher {
   background: #ffcc80;
   border-radius: 6px;
   padding: 8px 15px;

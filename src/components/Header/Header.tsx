@@ -46,6 +46,8 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
   const userName = user?.user_metadata.full_name?.split(' ')[0] || user?.email;
   const avatarUrl = user?.user_metadata.avatar_url || '/default-avatar.png';
 
+  // const currentLang = availableLanguages.find((lang) => lang.code === locale);
+
   return (
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
@@ -64,9 +66,9 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
             {user ? t('header.addRecipe') : t('header.loginToAdd')}
           </button>
 
-          <div className={s.LanguageSwitcher}>
+          <div className={s.languageSwitcher}>
             <select
-              value={locale}
+              value={'🔽' + locale}
               onChange={(e) =>
                 setLocale(
                   (e.target as HTMLSelectElement).value as AvailableLanguageCode
@@ -74,9 +76,9 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
               }
               className={s.languageSelect}
             >
-              {availableLanguages.map(({code, label}) => (
+              {availableLanguages.map(({code, label, flag}) => (
                 <option key={code} value={code}>
-                  {label}
+                  {flag} {label}
                 </option>
               ))}
             </select>
