@@ -71,6 +71,8 @@ const RecipePage: React.FC = () => {
           setRecipe(data);
           // Check if the current user is the owner of this recipe
           const usercanModify = user && data.user_id === user.id;
+          console.log('data.user_id:', data.user_id);
+          console.log('user.id:', user?.id);
           const userIsAdmin =
             user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
 
