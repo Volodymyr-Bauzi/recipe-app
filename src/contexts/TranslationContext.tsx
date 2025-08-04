@@ -1,17 +1,19 @@
-import React, {createContext} from 'react';
+import React, {createContext, useMemo, useState} from 'react';
 import type {ReactNode} from 'react';
-import {enTranslations} from '../translations/en';
-import {ukrTranslations} from '../translations/ukr';
+import {translations, availableLanguages} from '../translations';
+import type {AvailableLanguageCode} from '../translations';
 import type {TranslationKeys} from '../types/translations';
-import {krTranslations} from '../translations/kr';
-import {esTranslations} from '../translations/es'; // Assuming you have an esTranslations file
 
-type TFunction = (key: string, params?: Record<string, string>) => string;
+type TFunction = (
+  key: keyof TranslationKeys,
+  params?: Record<string, string>
+) => string;
 
 interface TranslationContextType {
   t: TFunction;
-  locale: string;
-  setLocale: (locale: string) => void;
+  locale: AvailableLanguageCode;
+  setLocale: (locale: AvailableLanguageCode) => void;
+  availableLanguages: typeof availableLanguages;
 }
 
 export const TranslationContext = createContext<TranslationContextType | null>(
@@ -20,35 +22,27 @@ export const TranslationContext = createContext<TranslationContextType | null>(
 
 interface TranslationProviderProps {
   children: ReactNode;
-  locale?: string;
+  locale?: AvailableLanguageCode;
 }
 
-const getTranslations = (locale: string): TranslationKeys => {
-  switch (locale) {
-    case 'en':
-      return enTranslations;
-    case 'kr':
-      return krTranslations;
-    case 'ukr':
-      return ukrTranslations;
-    case 'es':
-      return esTranslations;
-    default:
-      return ukrTranslations;
-  }
-};
-
-export const TranslationProvider = ({
+export const TranslationProvider: React.FC<TranslationProviderProps> = ({
   children,
   locale = 'ukr',
-}: TranslationProviderProps) => {
-  const [currentLocale, setCurrentLocale] = React.useState(locale);
-  const translations = getTranslations(currentLocale);
+}) => {
+  const [currentLocale, setCurrentLocale] =
+    useState<AvailableLanguageCode>(locale);
 
+  // Memoize translations for current locale
+  const currentTranslations = useMemo(
+    () => translations[currentLocale],
+    [currentLocale]
+  );
+
+  // Translation function
   const t: TFunction = (key, params) => {
-    let translation = translations[key as keyof TranslationKeys] || key;
+    let translation = currentTranslations[key] || key;
 
-    // Замінюємо параметри типу {{param}}
+    // Replace {{param}} with actual values
     if (params) {
       Object.entries(params).forEach(([paramKey, value]) => {
         translation = translation.replace(`{{${paramKey}}}`, value);
@@ -64,6 +58,7 @@ export const TranslationProvider = ({
         t,
         locale: currentLocale,
         setLocale: setCurrentLocale,
+        availableLanguages,
       }}
     >
       {children}

@@ -88,3 +88,5 @@ export interface TranslationKeys {
   'auth.loginLink': string;
   'auth.successMessage': string;
 }
+
+export type TranslationRecord = Record<keyof TranslationKeys, string>;
