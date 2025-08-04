@@ -94,16 +94,41 @@
 }
 
 .languageSwitcher {
-  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ffcc80;
+  border: 3px solid grey;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  color: #555;
+}
+
+.languageSwitcher:hover {
+  background-color: #e6b800;
+  border-color: black;
 }
 
 .languageSelect {
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background: #fff;
+  background: transparent;
+  border: none;
   font-size: 14px;
+  font-weight: bold;
+  color: #555;
   cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding: 2px 5px;
+}
+
+.languageSwitcher::after {
+  content: '▼';
+  font-size: 0.6rem;
+  margin-left: 5px;
+  color: #555;
 }
 
 @media (max-width: 1200px) {
@@ -162,5 +187,16 @@
 
   .hamburgerMenu {
     display: block;
+  }
+
+  .languageSwitcher {
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px 12px;
+  }
+
+  .languageSelect {
+    width: 100%;
+    text-align: left;
   }
 }
