@@ -89,4 +89,9 @@ export interface TranslationKeys {
   'auth.successMessage': string;
 }
 
+export interface LanguageOption {
+  code: string;
+  label: string;
+}
+
 export type TranslationRecord = Record<keyof TranslationKeys, string>;

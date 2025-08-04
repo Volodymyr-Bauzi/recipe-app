@@ -1,8 +1,11 @@
 import React, {createContext, useMemo, useState} from 'react';
 import type {ReactNode} from 'react';
-import {translations, availableLanguages} from '../translations';
-import type {AvailableLanguageCode} from '../translations';
-import type {TranslationKeys} from '../types/translations';
+import {
+  translations,
+  availableLanguages,
+  type AvailableLanguageCode,
+} from '../translations';
+import type {LanguageOption, TranslationKeys} from '../types/translations';
 
 type TFunction = (
   key: keyof TranslationKeys,
@@ -13,7 +16,7 @@ interface TranslationContextType {
   t: TFunction;
   locale: AvailableLanguageCode;
   setLocale: (locale: AvailableLanguageCode) => void;
-  availableLanguages: typeof availableLanguages;
+  availableLanguages: LanguageOption[];
 }
 
 export const TranslationContext = createContext<TranslationContextType | null>(

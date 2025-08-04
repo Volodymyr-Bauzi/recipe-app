@@ -4,6 +4,7 @@ import {supabase} from '../../lib/supabaseClient';
 import AuthModal from '../AuthModal/AuthModal';
 import s from './Header.module.css';
 import {useTranslation} from '../../hooks/useTranslation';
+import type {AvailableLanguageCode} from '../../translations';
 
 interface HeaderProps {
   onAddRecipeClick: () => void;
@@ -16,7 +17,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
   const [authOpen, setAuthOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(false);
 
-  const {t} = useTranslation();
+  const {t, locale, setLocale, availableLanguages} = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +63,24 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           >
             {user ? t('header.addRecipe') : t('header.loginToAdd')}
           </button>
+
+          <div className={s.LanguageSwitcher}>
+            <select
+              value={locale}
+              onChange={(e) =>
+                setLocale(
+                  (e.target as HTMLSelectElement).value as AvailableLanguageCode
+                )
+              }
+              className={s.languageSelect}
+            >
+              {availableLanguages.map(({code, label}) => (
+                <option key={code} value={code}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <div className={s.authButtons}>
             {user ? (

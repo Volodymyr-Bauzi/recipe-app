@@ -8,10 +8,13 @@ export const useTranslation = () => {
   if (!context) {
     // Fallback якщо контекст не знайдено
     return {
-      t: (key: string, params?: Record<string, string>) => {
-        console.warn(`Translation missing for key: ${key}`, params);
+      t: (key: string) => {
+        console.warn(`Translation missing for key: ${key}`);
         return key;
       },
+      locale: 'ukr',
+      setLocale: () => {},
+      availableLanguages: [],
     };
   }
 
