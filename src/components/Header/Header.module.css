@@ -77,6 +77,10 @@
   border: 3px solid grey;
 }
 
+.toggleNavBarButton {
+  display: none;
+}
+
 .logoutBtn:hover,
 .authButton:hover,
 .addButton:hover,
@@ -91,6 +95,7 @@
 }
 
 .hamburgerMenu {
+  opacity: 0;
   display: none;
 }
 
@@ -162,6 +167,12 @@
     align-items: center;
   }
 
+  .toggleNavBarButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .headerMain {
     display: flex;
     justify-content: space-between;
@@ -196,10 +207,6 @@
   .headerTitle {
     margin: 0 auto;
     font-size: 1.5rem;
-  }
-
-  .hamburgerMenu {
-    display: block;
   }
 
   .languageSwitcher {
