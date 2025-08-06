@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {supabase} from '../../lib/supabaseClient';
 import {useTranslation} from '../../hooks/useTranslation';
@@ -19,12 +19,23 @@ const RecipePage: React.FC = () => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   const {user} = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const {recipe, loading, error, refetchRecipe} = useRecipe(id, user);
 
   // Check if current user is admin using environment variable
-  const isAdmin = user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
+  useEffect(() => {
+    if (user) {
+      // Fetch admin status from database
+      supabase
+        .from('users') // or wherever you store user info
+        .select('is_admin')
+        .eq('id', user.id)
+        .single()
+        .then(({data}) => setIsAdmin(data?.is_admin || false));
+    }
+  }, [user]);
 
   // Dummy states for PageWrapper compatibility
   const emptySetRecipes = () => {};
