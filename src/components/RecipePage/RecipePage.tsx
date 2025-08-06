@@ -46,7 +46,6 @@ const RecipePage: React.FC = () => {
     );
     console.log('Is admin:', isAdmin);
     console.log('Recipe owner ID:', recipe?.user_id);
-    console.log('Recipe ID to delete:', id);
 
     try {
       const deleteQuery = supabase.from('recipes').delete().eq('id', id);
