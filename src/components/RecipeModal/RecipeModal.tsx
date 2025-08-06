@@ -19,18 +19,6 @@ interface RecipeModalProps {
 const LOCAL_FONT_SIZE_KEY = 'recipeModalFontSize';
 const LOCAL_STORAGE_KEY = 'unsavedRecipeForm';
 
-const categories = [
-  'Торти',
-  'Десерти',
-  'Основні',
-  'Супи',
-  'Гарніри',
-  'Салати',
-  "М'ясне",
-  'Закрутки',
-  'Закуски',
-];
-
 function RecipeModal({
   isOpen,
   onClose,
@@ -55,6 +43,20 @@ function RecipeModal({
   });
 
   const {t} = useTranslation();
+
+  const categories = [
+    t('categories.mainDishes'),
+    t('categories.soups'),
+    t('categories.sides'),
+    t('categories.meats'),
+    t('categories.salads'),
+    t('categories.desserts'),
+    t('categories.snacks'),
+    t('categories.baking'),
+    t('categories.beverages'),
+    t('categories.preserves'),
+    t('categories.pizza'),
+  ];
 
   const isEditMode = !!recipeToEdit;
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
