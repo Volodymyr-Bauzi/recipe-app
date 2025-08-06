@@ -36,11 +36,14 @@ const RecipePage: React.FC = () => {
     if (!id || !user) return;
 
     try {
-      const {error} = await supabase
-        .from('recipes')
-        .delete()
-        .eq('id', id)
-        .eq(isAdmin ? 'id' : 'user_id', isAdmin ? id : user.id);
+      const deleteQuery = supabase.from('recipes').delete().eq('id', id);
+
+      // Admin can delete any recipe, regular users can only delete their own
+      if (!isAdmin) {
+        deleteQuery.eq('user_id', user.id);
+      }
+
+      const {error} = await deleteQuery;
 
       if (error) throw error;
 
