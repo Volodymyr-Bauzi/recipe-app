@@ -20,8 +20,11 @@ const RecipePage: React.FC = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const {user, isAdmin} = useAuth();
+  const {user} = useAuth();
   const {recipe, loading, error, refetchRecipe} = useRecipe(id, user);
+
+  // Check if current user is admin using environment variable
+  const isAdmin = user?.id === process.env.REACT_APP_SUPABASE_ADMIN_USER_ID;
 
   // Dummy states for PageWrapper compatibility
   const emptySetRecipes = () => {};
@@ -35,21 +38,52 @@ const RecipePage: React.FC = () => {
   const handleDeleteRecipe = async () => {
     if (!id || !user) return;
 
+    // Debug logging to check admin status
+    console.log('Current user ID:', user.id);
+    console.log(
+      'Admin user ID from env:',
+      process.env.REACT_APP_SUPABASE_ADMIN_USER_ID
+    );
+    console.log('Is admin:', isAdmin);
+    console.log('Recipe owner ID:', recipe?.user_id);
+
     try {
       const deleteQuery = supabase.from('recipes').delete().eq('id', id);
 
-      // Admin can delete any recipe, regular users can only delete their own
+      // Only add user_id filter if user is NOT admin
       if (!isAdmin) {
         deleteQuery.eq('user_id', user.id);
+        console.log('Adding user_id filter for non-admin user');
+      } else {
+        console.log('Admin user - no user_id filter applied');
       }
 
-      const {error} = await deleteQuery;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const {data, error, count} = await deleteQuery; // suppress unused variable warning
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
 
+      // Check if the recipe was actually deleted
+      if (count === 0) {
+        console.error('Recipe was not deleted - count is 0');
+        alert(
+          'Failed to delete recipe. This might be due to database permissions (RLS policies).'
+        );
+        return;
+      }
+
+      console.log('Recipe deleted successfully, count:', count);
       navigate('/');
     } catch (error) {
-      console.error('Error deleting recipe:', error);
+      if (error instanceof Error) {
+        console.error('Error deleting recipe:', error.message);
+        alert('An error occurred while deleting the recipe: ' + error?.message);
+      } else {
+        console.error('Error deleting recipe:', error);
+      }
     } finally {
       setIsDeleteModalOpen(false);
     }
