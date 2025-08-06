@@ -58,8 +58,7 @@ const RecipePage: React.FC = () => {
         console.log('Admin user - no user_id filter applied');
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const {data, error, count} = await deleteQuery; // suppress unused variable warning
+      const {error, count} = await deleteQuery; // suppress unused variable warning
 
       if (error) {
         console.error('Supabase error:', error);
