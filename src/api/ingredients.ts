@@ -1,3 +1,4 @@
+// src/api/ingredients.ts
 import {supabase} from '../lib/supabaseClient';
 
 export async function getAllIngredients() {

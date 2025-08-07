@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+// src/components/RecipePage/RecipePage.tsx
+import React, {useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {supabase} from '../../lib/supabaseClient';
 import {useTranslation} from '../../hooks/useTranslation';
@@ -9,8 +10,8 @@ import RecipeHeader from './RecipeHeader';
 import RecipeInfo from './RecipeInfo';
 import RecipeContent from './RecipeContent';
 import {useRecipe} from './hooks/useRecipe';
-import {useAuth} from './hooks/useAuth';
 import s from './RecipePage.module.css';
+import {useAuth} from '../../hooks/useSupabaseAuth';
 
 const RecipePage: React.FC = () => {
   const {id} = useParams<{id: string}>();
@@ -19,29 +20,17 @@ const RecipePage: React.FC = () => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const {user} = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
 
+  // Use the updated useAuth hook
+  const {user, isAdmin, loading: authLoading} = useAuth();
   const {recipe, loading, error, refetchRecipe} = useRecipe(id, user);
-
-  // Check if current user is admin using environment variable
-  useEffect(() => {
-    if (user) {
-      // Fetch admin status from database
-      supabase
-        .from('users') // or wherever you store user info
-        .select('is_admin')
-        .eq('id', user.id)
-        .single()
-        .then(({data}) => setIsAdmin(data?.is_admin || false));
-    }
-  }, [user]);
 
   // Dummy states for PageWrapper compatibility
   const emptySetRecipes = () => {};
   const [searchQuery] = useState('');
   const [selectedCategory] = useState<string | null>(null);
 
+  // User can modify if they own the recipe OR if they're an admin
   const canModify = Boolean(
     user && recipe && (recipe.user_id === user.id || isAdmin)
   );
@@ -49,58 +38,27 @@ const RecipePage: React.FC = () => {
   const handleDeleteRecipe = async () => {
     if (!id || !user) return;
 
-    // Debug logging to check admin status
-    console.log('Current user ID:', user.id);
-    console.log(
-      'Admin user ID from env:',
-      process.env.REACT_APP_SUPABASE_ADMIN_USER_ID
-    );
-    console.log('Is admin:', isAdmin);
-    console.log('Recipe owner ID:', recipe?.user_id);
-    console.log('Recipe ID to delete:', id);
-
     try {
-      const deleteQuery = supabase.from('recipes').delete().eq('id', id);
-
-      // Only add user_id filter if user is NOT admin
-      if (!isAdmin) {
-        deleteQuery.eq('user_id', user.id);
-        console.log('Adding user_id filter for non-admin user');
-      } else {
-        console.log('Admin user - no user_id filter applied');
-      }
-
-      const {error, count} = await deleteQuery; // suppress unused variable warning
+      // Simple delete - RLS policies will handle the permissions
+      const {error} = await supabase.from('recipes').delete().eq('id', id);
 
       if (error) {
         console.error('Supabase error:', error);
         throw error;
       }
 
-      // Check if the recipe was actually deleted
-      if (count === 0) {
-        console.error('Recipe was not deleted - count is 0');
-        alert(
-          'Failed to delete recipe. This might be due to database permissions (RLS policies).'
-        );
-        return;
-      }
-
-      console.log('Recipe deleted successfully, count:', count);
+      console.log('Recipe deleted successfully');
       navigate('/');
     } catch (error) {
-      if (error instanceof Error) {
-        console.error('Error deleting recipe:', error.message);
-        alert('An error occurred while deleting the recipe: ' + error?.message);
-      } else {
-        console.error('Error deleting recipe:', error);
-      }
+      console.error('Error deleting recipe:', error);
+      alert('Failed to delete recipe. Please try again.');
     } finally {
       setIsDeleteModalOpen(false);
     }
   };
 
-  if (loading) {
+  // Show loading while checking auth or fetching recipe
+  if (loading || authLoading) {
     return (
       <PageWrapper
         setRecipes={emptySetRecipes}
@@ -149,6 +107,23 @@ const RecipePage: React.FC = () => {
             onEdit={() => setIsEditModalOpen(true)}
             onDelete={() => setIsDeleteModalOpen(true)}
           />
+
+          {/* Show admin badge if user is admin */}
+          {isAdmin && (
+            <div
+              style={{
+                background: '#ff4444',
+                color: 'white',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                fontSize: '12px',
+                marginBottom: '16px',
+                width: 'fit-content',
+              }}
+            >
+              ADMIN
+            </div>
+          )}
 
           <RecipeInfo
             category={recipe.category}

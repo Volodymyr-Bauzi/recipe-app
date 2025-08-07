@@ -1,30 +1,61 @@
-// src/hooks/useSupabaseAuth.ts
+// src/hooks/useAuth.ts
 import {useEffect, useState} from 'react';
 import {supabase} from '../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
 
-interface UseSupabaseAuth {
+interface UseAuth {
   user: User | null;
+  isAdmin: boolean;
+  loading: boolean;
 }
 
-export function useSupabaseAuth(): UseSupabaseAuth {
+export function useAuth(): UseAuth {
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get session on initial load
-    supabase.auth.getUser().then(({data}) => {
-      if (data?.user) setUser(data.user);
-    });
+    // Get initial session
+    const getInitialSession = async () => {
+      const {
+        data: {user},
+      } = await supabase.auth.getUser();
+      setUser(user);
 
-    // Listen for login/logout
-    const {data: listener} = supabase.auth.onAuthStateChange((_, session) => {
-      setUser(session?.user ?? null);
-    });
+      if (user) {
+        // Check admin status from JWT app_metadata
+        const appMetadata = user.app_metadata || {};
+        const isUserAdmin = appMetadata.role === 'admin';
+        setIsAdmin(isUserAdmin);
+      } else {
+        setIsAdmin(false);
+      }
 
-    return () => {
-      listener?.subscription.unsubscribe();
+      setLoading(false);
     };
+
+    getInitialSession();
+
+    // Listen for auth changes
+    const {
+      data: {subscription},
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      setUser(session?.user ?? null);
+
+      if (session?.user) {
+        // Check admin status from JWT app_metadata
+        const appMetadata = session.user.app_metadata || {};
+        const isUserAdmin = appMetadata.role === 'admin';
+        setIsAdmin(isUserAdmin);
+      } else {
+        setIsAdmin(false);
+      }
+
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  return {user};
+  return {user, isAdmin, loading};
 }
