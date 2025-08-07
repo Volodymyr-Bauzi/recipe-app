@@ -168,6 +168,7 @@
   }
 
   .toggleNavBarButton {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,5 +218,21 @@
   .languageSelect {
     width: 100%;
     text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerContent {
+    width: 95%;
+  }
+}
+
+@media (max-width: 363px) {
+  .headerContent {
+    width: 100%;
+  }
+  .toggleNavBarButton {
+    padding: 6px 10px;
+    border-width: 1px;
   }
 }
