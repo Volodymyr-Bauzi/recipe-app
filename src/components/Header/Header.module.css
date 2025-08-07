@@ -19,8 +19,6 @@
 }
 
 .headerMain {
-  display: flex;
-  align-items: center;
   width: 100%;
 }
 
@@ -74,7 +72,7 @@
   color: #555;
   font-weight: bold;
   cursor: pointer;
-  border: 3px solid grey;
+  border: 2px solid grey;
 }
 
 .toggleNavBarButton {
@@ -102,15 +100,7 @@
 .languageSwitcher {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background-color: #ffcc80;
-  border: 3px solid grey;
-  border-radius: 6px;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  font-weight: bold;
-  color: #555;
+  padding: 0;
   position: relative;
 }
 
@@ -120,33 +110,37 @@
   border-color: black;
 }
 
-/* Custom arrow for dropdown */
-.languageSwitcher::after {
-  content: '▼';
-  font-size: 0.6rem;
-  margin-left: 5px;
-  color: #555;
-  pointer-events: none;
-}
-
 /* The select element itself */
 .languageSelect {
   background: transparent;
   border: none;
-  font-size: 14px;
-  font-weight: bold;
   color: #555;
+  padding: 8px 15px;
   cursor: pointer;
+  font-weight: bold;
   outline: none;
   appearance: none;
+  /* font-size: 14px;
   padding: 2px 5px;
   display: flex;
   align-items: center;
+  border: 3px solid red; */
+}
+
+.languageSwitcher::after {
+  content: '▼';
+  position: absolute;
+  right: 0;
+  margin-right: 5px;
+  font-size: 0.6rem;
+  color: #555;
+  pointer-events: none;
 }
 
 /* Optional: Flag spacing in options (works in Chrome/Firefox) */
 .languageSelect option {
   padding-left: 0.5rem;
+  background: #ffcc80;
 }
 
 @media (max-width: 1200px) {
