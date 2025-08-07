@@ -48,22 +48,32 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
 
   // const currentLang = availableLanguages.find((lang) => lang.code === locale);
 
+  const myStyles: React.CSSProperties = {
+    flexDirection: 'row-reverse',
+  };
+  const mySecondaryStyles: React.CSSProperties = {
+    alignItems: 'end',
+  };
+
   return (
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
-        <div className={s.headerMain}>
+        <div style={myStyles} className={s.headerMain}>
           <button className={s.toggleNavBarButton} onClick={toggleMenu}>
             ☰
           </button>
           <h1 className={s.headerTitle}>{t('header.title')}</h1>
         </div>
 
-        <div className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}>
+        <div
+          style={mySecondaryStyles}
+          className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}
+        >
           <button
             className={s.addButton}
             onClick={user ? onAddRecipeClick : () => setAuthOpen(true)}
           >
-            {user ? t('header.addRecipe') : t('header.loginToAdd')}
+            {t('header.addRecipe')}
           </button>
 
           <div className={s.languageSwitcher}>
