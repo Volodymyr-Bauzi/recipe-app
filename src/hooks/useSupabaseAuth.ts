@@ -8,7 +8,7 @@ interface UseSupabaseAuth {
   loading: boolean;
 }
 
-function useSupabaseAuth(): UseSupabaseAuth {
+export function useSupabaseAuth(): UseSupabaseAuth {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -58,5 +58,3 @@ function useSupabaseAuth(): UseSupabaseAuth {
 
   return {user, isAdmin, loading};
 }
-
-export default useSupabaseAuth;

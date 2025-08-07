@@ -11,7 +11,7 @@ import RecipeInfo from './RecipeInfo';
 import RecipeContent from './RecipeContent';
 import {useRecipe} from './hooks/useRecipe';
 import s from './RecipePage.module.css';
-import useSupabaseAuth from '../../hooks/useSupabaseAuth';
+import {useSupabaseAuth} from '../../hooks/useSupabaseAuth';
 
 const RecipePage: React.FC = () => {
   const {id} = useParams<{id: string}>();
