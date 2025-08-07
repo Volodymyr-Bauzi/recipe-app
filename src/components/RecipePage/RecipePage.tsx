@@ -11,7 +11,7 @@ import RecipeInfo from './RecipeInfo';
 import RecipeContent from './RecipeContent';
 import {useRecipe} from './hooks/useRecipe';
 import s from './RecipePage.module.css';
-import {useAuth} from '../../hooks/useSupabaseAuth';
+import useSupabaseAuth from '../../hooks/useSupabaseAuth';
 
 const RecipePage: React.FC = () => {
   const {id} = useParams<{id: string}>();
@@ -22,7 +22,7 @@ const RecipePage: React.FC = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Use the updated useAuth hook
-  const {user, isAdmin, loading: authLoading} = useAuth();
+  const {user, isAdmin, loading: authLoading} = useSupabaseAuth();
   const {recipe, loading, error, refetchRecipe} = useRecipe(id, user);
 
   // Dummy states for PageWrapper compatibility

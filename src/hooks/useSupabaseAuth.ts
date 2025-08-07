@@ -1,15 +1,14 @@
-// src/hooks/useAuth.ts
+// src/hooks/useSupabaseAuth.ts
 import {useEffect, useState} from 'react';
 import {supabase} from '../lib/supabaseClient';
 import type {User} from '@supabase/supabase-js';
-
-interface UseAuth {
+interface UseSupabaseAuth {
   user: User | null;
   isAdmin: boolean;
   loading: boolean;
 }
 
-export function useAuth(): UseAuth {
+function useSupabaseAuth(): UseSupabaseAuth {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -59,3 +58,5 @@ export function useAuth(): UseAuth {
 
   return {user, isAdmin, loading};
 }
+
+export default useSupabaseAuth;
