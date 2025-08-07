@@ -102,6 +102,7 @@
   align-items: center;
   padding: 0;
   position: relative;
+  min-width: 110px;
 }
 
 /* Hover effect matching buttons */
@@ -141,6 +142,15 @@
 .languageSelect option {
   padding-left: 0.5rem;
   background: #ffcc80;
+}
+
+@media (max-width: 1338px) {
+  .logoutBtn,
+  .authButton,
+  .addButton,
+  .languageSelect {
+    padding: 6px 2px;
+  }
 }
 
 @media (max-width: 1200px) {
