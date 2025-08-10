@@ -62,7 +62,8 @@
 .authButton,
 .addButton,
 .toggleNavBarButton,
-.languageSwitcher {
+.languageSwitcher,
+.settingsButton {
   background: #ffcc80;
   border-radius: 6px;
   padding: 8px 15px;
@@ -82,8 +83,10 @@
 .logoutBtn:hover,
 .authButton:hover,
 .addButton:hover,
-.toggleNavBarButton:hover {
-  background-color: #e6b800;
+.toggleNavBarButton:hover,
+.languageSwitcher:hover,
+.settingsButton:hover {
+  background-color: #ffdd00;
   border-color: black;
 }
 
@@ -103,12 +106,6 @@
   padding: 0;
   position: relative;
   min-width: 110px;
-}
-
-/* Hover effect matching buttons */
-.languageSwitcher:hover {
-  background-color: #e6b800;
-  border-color: black;
 }
 
 /* The select element itself */

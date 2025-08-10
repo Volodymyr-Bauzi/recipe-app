@@ -94,7 +94,11 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
             </select>
           </div>
 
-          <button className={s.authButton}>
+          <div className={s.settings}>
+            <button className={s.settingsButton}>Settings</button>
+          </div>
+
+          <div className={s.authButtons}>
             {user ? (
               <div className={s.userInfo}>
                 <img
@@ -115,9 +119,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
                 {t('header.loginOrRegister')}
               </button>
             )}
-          </button>
-
-          <div className={s.settingsButton}>Settings</div>
+          </div>
         </div>
       </div>
 
