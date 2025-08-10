@@ -5,6 +5,7 @@ import AuthModal from '../AuthModal/AuthModal';
 import s from './Header.module.css';
 import {useTranslation} from '../../hooks/useTranslation';
 import type {AvailableLanguageCode} from '../../translations';
+import {IoIosSettings} from 'react-icons/io';
 
 interface HeaderProps {
   onAddRecipeClick: () => void;
@@ -95,7 +96,9 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           </div>
 
           <div className={s.settings}>
-            <button className={s.settingsButton}>Settings</button>
+            <button className={s.settingsButton}>
+              <IoIosSettings /> {t('header.settings')}
+            </button>
           </div>
 
           <div className={s.authButtons}>

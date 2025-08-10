@@ -47,6 +47,7 @@ export const esTranslations: TranslationKeys = {
   'recipe.minutes.full': 'minutos',
   'header.title': 'Recetas del Hogar',
   'header.addRecipe': 'Agregar nueva receta',
+  'header.settings': 'Ajustes',
   'header.loginToAdd': 'Inicie sesión para agregar una receta',
   'header.loginOrRegister': 'Iniciar sesión / Registrarse',
   'header.logout': 'Cerrar sesión',

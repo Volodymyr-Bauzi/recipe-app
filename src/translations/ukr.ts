@@ -48,6 +48,7 @@ export const ukrTranslations: TranslationKeys = {
 
   'header.title': 'Домашні Рецепти',
   'header.addRecipe': 'Додати новий рецепт',
+  'header.settings': 'Налаштування',
   'header.loginToAdd': 'Увійдіть, щоб додати рецепт',
   'header.loginOrRegister': 'Увійти / Зареєструватися',
   'header.logout': 'Вийти',

@@ -45,6 +45,7 @@ export const krTranslations: TranslationKeys = {
   'recipe.minutes.full': '분',
   'header.title': '홈 레시피',
   'header.addRecipe': '새 레시피 추가',
+  'header.settings': '설정',
   'header.loginToAdd': '레시피를 추가하려면 로그인하세요',
   'header.loginOrRegister': '로그인 / 회원가입',
   'header.logout': '로그아웃',

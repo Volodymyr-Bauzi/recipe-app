@@ -45,6 +45,7 @@ export interface TranslationKeys {
 
   'header.title': string;
   'header.addRecipe': string;
+  'header.settings': string;
   'header.loginToAdd': string;
   'header.loginOrRegister': string;
   'header.logout': string;

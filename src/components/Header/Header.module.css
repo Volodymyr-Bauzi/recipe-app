@@ -90,6 +90,12 @@
   border-color: black;
 }
 
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
 .addButton::before {
   content: '➕';
   margin-right: 5px;

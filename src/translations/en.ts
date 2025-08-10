@@ -45,6 +45,7 @@ export const enTranslations: TranslationKeys = {
   'recipe.minutes.full': 'minutes',
   'header.title': 'Home Recipes',
   'header.addRecipe': 'Add New Recipe',
+  'header.settings': 'Settings',
   'header.loginToAdd': 'Log in to add a recipe',
   'header.loginOrRegister': 'Log in / Register',
   'header.logout': 'Log out',
