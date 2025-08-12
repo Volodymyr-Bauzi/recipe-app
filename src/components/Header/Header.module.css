@@ -3,8 +3,6 @@
   top: 0;
   left: 0;
   width: 100vw;
-  display: flex;
-  justify-content: space-between;
   transition: 0.4s ease-in;
   background-color: #ffe4c4;
   padding: 15px;
@@ -13,7 +11,6 @@
 .headerContent {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 80%;
   margin: 0 auto;
 }
@@ -25,7 +22,6 @@
 .headerSecondary {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   width: 100%;
 }
 
