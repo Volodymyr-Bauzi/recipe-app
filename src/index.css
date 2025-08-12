@@ -37,6 +37,10 @@ body.modalOpen {
   overflow: hidden;
 }
 
+button {
+  all: unset;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
