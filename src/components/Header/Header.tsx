@@ -14,6 +14,7 @@ interface HeaderProps {
 const Header = ({onAddRecipeClick}: HeaderProps) => {
   const {user} = useSupabaseAuth();
   const headerRef = useRef<HTMLElement | null>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const [authOpen, setAuthOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(false);
@@ -80,9 +81,21 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
             {t('header.addRecipe')}
           </button>
 
-          <div className={`${s.languageSwitcher} ${s.headerBtn}`}>
+          <div
+            className={`${s.languageSwitcher} ${s.headerBtn}`}
+            onClick={() => {
+              if (selectRef.current) {
+                if (selectRef.current.showPicker) {
+                  selectRef.current.showPicker();
+                } else {
+                  selectRef.current.click();
+                }
+              }
+            }}
+          >
             <select
               name="languageSelect"
+              ref={selectRef}
               value={locale}
               onChange={(e) =>
                 setLocale(
