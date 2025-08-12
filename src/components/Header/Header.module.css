@@ -21,8 +21,24 @@
 
 .headerSecondary {
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
+}
+
+.headerBtn {
+  background: #ffcc80;
+  border-radius: 6px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: #555;
+  font-weight: bold;
+  border: 2px solid grey;
+  word-wrap: break-word;
+  width: max-content;
+  font-size: calc(1rem - 0.1vmin);
+}
+.headerBtn:hover {
+  background-color: #ffdd00;
+  border-color: black;
 }
 
 .authContainer {
@@ -49,42 +65,8 @@
   font-weight: 500;
 }
 
-.logoutBtn,
-.authButton,
-.addButton,
-.toggleNavBarButton,
-.languageSwitcher,
-.settingsButton {
-  background: #ffcc80;
-  border-radius: 6px;
-  padding: 8px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: #555;
-  font-weight: bold;
-  cursor: pointer;
-  border: 2px solid grey;
-  font-size: 0.9em;
-  height: 35px;
-}
-
-.languageSelect {
-  font-size: 0.9em;
-}
-
 .toggleNavBarButton {
   display: none;
-}
-
-.logoutBtn:hover,
-.authButton:hover,
-.addButton:hover,
-.toggleNavBarButton:hover,
-.languageSwitcher:hover,
-.settingsButton:hover {
-  background-color: #ffdd00;
-  border-color: black;
 }
 
 .settingsButton {
@@ -106,26 +88,25 @@
 .languageSwitcher {
   display: flex;
   align-items: center;
-  padding: 0;
   position: relative;
-  min-width: 110px;
+  /* min-width: 125px; */
 }
 
 /* The select element itself */
 .languageSelect {
-  background: transparent;
-  border: none;
-  color: #555;
-  padding: 8px 15px;
-  cursor: pointer;
-  font-weight: bold;
-  outline: none;
   appearance: none;
-  /* font-size: 14px;
-  padding: 2px 5px;
-  display: flex;
-  align-items: center;
-  border: 3px solid red; */
+  border: none;
+  background: #ffcc80;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+  padding: 3px 10px;
+  font-size: 1rem;
+}
+
+.languageSelect:hover {
+  background-color: #ffdd00;
+  border-color: black;
 }
 
 .languageSwitcher::after {
@@ -138,18 +119,12 @@
   pointer-events: none;
 }
 
-/* Optional: Flag spacing in options (works in Chrome/Firefox) */
-.languageSelect option {
-  padding-left: 0.5rem;
-  background: #ffcc80;
-}
-
 @media (max-width: 1338px) {
-  .logoutBtn,
-  .authButton,
-  .addButton,
-  .languageSelect {
+  .headerBtn {
     padding: 6px 2px;
+  }
+  .toggleNavBarButton {
+    padding: 8px 15px;
   }
 }
 

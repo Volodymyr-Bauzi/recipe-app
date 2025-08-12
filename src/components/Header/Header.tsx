@@ -60,7 +60,10 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
     <header ref={headerRef} className={s.header}>
       <div className={s.headerContent}>
         <div style={myStyles} className={s.headerMain}>
-          <button className={s.toggleNavBarButton} onClick={toggleMenu}>
+          <button
+            className={`${s.toggleNavBarButton} ${s.headerBtn}`}
+            onClick={toggleMenu}
+          >
             ☰
           </button>
           <h1 className={s.headerTitle}>{t('header.title')}</h1>
@@ -71,14 +74,15 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}
         >
           <button
-            className={s.addButton}
+            className={`${s.addButton} ${s.headerBtn}`}
             onClick={user ? onAddRecipeClick : () => setAuthOpen(true)}
           >
             {t('header.addRecipe')}
           </button>
 
-          <div className={s.languageSwitcher}>
+          <div className={`${s.languageSwitcher} ${s.headerBtn}`}>
             <select
+              name="languageSelect"
               value={locale}
               onChange={(e) =>
                 setLocale(
@@ -96,7 +100,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           </div>
 
           <div className={s.settings}>
-            <button className={s.settingsButton}>
+            <button className={`${s.settingsButton}  ${s.headerBtn}`}>
               <IoIosSettings /> {t('header.settings')}
             </button>
           </div>
@@ -110,14 +114,17 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
                   className={s.avatar}
                 />
                 <span className={s.userName}>{userName}</span>
-                <button className={s.logoutBtn} onClick={handleLogout}>
+                <button
+                  className={`${s.logoutBtn}  ${s.headerBtn}`}
+                  onClick={handleLogout}
+                >
                   {t('header.logout')}
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setAuthOpen(true)}
-                className={s.authButton}
+                className={`${s.authButton}  ${s.headerBtn}`}
               >
                 {t('header.loginOrRegister')}
               </button>
