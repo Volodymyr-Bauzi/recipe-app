@@ -37,8 +37,9 @@
   font-size: calc(1rem - 0.1vmin);
 }
 .headerBtn:hover {
-  background-color: #ffdd00;
-  border-color: black;
+  background: #ffbd5a;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
+  border-color: rgb(88, 88, 88);
 }
 
 .authContainer {
@@ -95,18 +96,21 @@
 /* The select element itself */
 .languageSelect {
   appearance: none;
-  border: none;
   background: #ffcc80;
   font-weight: bold;
   cursor: pointer;
   color: #555;
-  padding: 3px 10px;
+  padding: 11px 15px;
+  border: 2px solid grey;
+  border-radius: 6px;
   font-size: 1rem;
+  transition: all 0.3s ease, transform 0.3s ease;
 }
 
 .languageSelect:hover {
-  background-color: #ffdd00;
-  border-color: black;
+  background: #ffbd5a;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
+  border-color: rgb(88, 88, 88);
 }
 
 .languageSwitcher::after {

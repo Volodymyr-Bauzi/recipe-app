@@ -81,18 +81,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
             {t('header.addRecipe')}
           </button>
 
-          <div
-            className={`${s.languageSwitcher} ${s.headerBtn}`}
-            onClick={() => {
-              if (selectRef.current) {
-                if (selectRef.current.showPicker) {
-                  selectRef.current.showPicker();
-                } else {
-                  selectRef.current.click();
-                }
-              }
-            }}
-          >
+          <div className={s.languageSwitcher}>
             <select
               name="languageSelect"
               ref={selectRef}
