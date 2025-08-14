@@ -2,6 +2,9 @@
 import type {TranslationKeys} from '../types/translations';
 
 export const krTranslations: TranslationKeys = {
+  'theme.dark': '어두움',
+  'theme.light': '밝음',
+
   'recipe.viewDetails': '레시피 세부 정보 보기: {{title}}',
   'recipe.minutes': '분',
   'recipe.ingredients': '재료',

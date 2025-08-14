@@ -2,6 +2,9 @@
 import type {TranslationKeys} from '../types/translations';
 
 export const ukrTranslations: TranslationKeys = {
+  'theme.dark': 'Темна',
+  'theme.light': 'Світла',
+
   'recipe.viewDetails': 'Переглянути деталі рецепту: {{title}}',
   'recipe.minutes': 'хв',
   'recipe.ingredients': 'Інгредієнти',

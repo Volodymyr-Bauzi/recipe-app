@@ -2,6 +2,9 @@
 import type {TranslationKeys} from '../types/translations';
 
 export const esTranslations: TranslationKeys = {
+  'theme.dark': 'Oscuro',
+  'theme.light': 'Claro',
+
   'recipe.viewDetails': 'Ver detalles de la receta: {{title}}',
   'recipe.minutes': 'min',
   'recipe.ingredients': 'Ingredientes',

@@ -1,5 +1,8 @@
 // types/translations.ts
 export interface TranslationKeys {
+  'theme.dark': string;
+  'theme.light': string;
+
   'recipe.viewDetails': string;
   'recipe.minutes': string;
   'recipe.ingredients': string;
