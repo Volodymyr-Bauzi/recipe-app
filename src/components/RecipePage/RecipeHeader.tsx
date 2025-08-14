@@ -24,7 +24,7 @@ const RecipeHeader: React.FC<RecipeHeaderProps> = ({
       <h1 className={s.recipeTitle}>{title}</h1>
 
       {canModify && (
-        <>
+        <div className="modify">
           <button className={s.editButton} onClick={onEdit}>
             <FaRegPenToSquare />
             {t('recipe.edit')}
@@ -36,7 +36,7 @@ const RecipeHeader: React.FC<RecipeHeaderProps> = ({
             <FaRegTrashCan />
             {t('recipe.delete')}
           </button>
-        </>
+        </div>
       )}
     </div>
   );

@@ -29,6 +29,11 @@
   color: #222;
 }
 
+.modify {
+  display: flex;
+  flex-direction: column;
+}
+
 .recipeInfo {
   display: flex;
   flex-wrap: wrap;
