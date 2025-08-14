@@ -6,6 +6,7 @@ import s from './Header.module.css';
 import {useTranslation} from '../../hooks/useTranslation';
 import type {AvailableLanguageCode} from '../../translations';
 import {IoIosSettings} from 'react-icons/io';
+import ThemeToggleBtn from '../ThemeToggleBtn';
 
 interface HeaderProps {
   onAddRecipeClick: () => void;
@@ -74,6 +75,7 @@ const Header = ({onAddRecipeClick}: HeaderProps) => {
           style={mySecondaryStyles}
           className={`${s.headerSecondary} ${activeMenu ? s.active : ''}`}
         >
+          <ThemeToggleBtn />
           <button
             className={`${s.addButton} ${s.headerBtn}`}
             onClick={user ? onAddRecipeClick : () => setAuthOpen(true)}
