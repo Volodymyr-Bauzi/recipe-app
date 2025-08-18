@@ -11,17 +11,22 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --trans: 0.3s ease-in;
 }
 
 [data-theme='light'] {
   --bg-color: #ffffff;
   --text-color: #555;
   --header-bg-color: #ffe4c4;
+  --bg-card-color: hwb(32 76% 10%);
 }
 
 [data-theme='dark'] {
   --bg-color: #1e1e1e;
   --text-color: #ffffff;
+  --header-bg-color: oklab(0.18 0 0);
+  --bg-card-color: oklab(0.25 0 -0.01);
 }
 
 html {
@@ -39,6 +44,7 @@ html {
 html,
 body {
   margin: 0;
+  transition: var(--trans);
 }
 
 body {
