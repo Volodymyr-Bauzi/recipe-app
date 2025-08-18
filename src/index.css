@@ -13,6 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme='light'] {
+  --bg-color: #ffffff;
+  --text-color: #555;
+  --header-bg-color: #ffe4c4;
+}
+
+[data-theme='dark'] {
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -40,6 +51,8 @@ body {
   min-height: 100vh;
   overflow: auto;
   line-height: 1.5;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body.modalOpen {
