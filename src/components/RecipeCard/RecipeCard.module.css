@@ -1,6 +1,6 @@
 .recipeCard {
   width: 300px;
-  background: #fff;
+  background: var(--bg-card-color);
   border-radius: 12px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
   overflow: hidden;
@@ -8,7 +8,7 @@
   padding: 20px;
   min-height: 12rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color);
 }
 
 .recipeCard:hover {
@@ -34,7 +34,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
-  color: #1f2937;
+  /* color: #1f2937; */
   word-wrap: break-word;
   hyphens: auto;
 }
@@ -132,9 +132,9 @@
 /* Dark theme support */
 @media (prefers-color-scheme: dark) {
   .recipeCard {
-    background: #1f2937;
+    /* background: #1f2937; */
     border-color: #374151;
-    color: #f9fafb;
+    /* color: #f9fafb; */
   }
 
   .recipeCard:hover {
@@ -142,7 +142,7 @@
   }
 
   .recipeTitle {
-    color: #f9fafb;
+    /* color: #f9fafb; */
   }
 
   .recipeCategory,
