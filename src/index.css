@@ -23,9 +23,9 @@
 }
 
 [data-theme='dark'] {
-  --bg-color: #1e1e1e;
+  --bg-color: hsl(215, 24%, 20%);
   --text-color: #ffffff;
-  --header-bg-color: oklab(0.18 0 0);
+  --header-bg-color: hwb(220 9% 78%);
   --bg-card-color: oklab(0.25 0 -0.01);
 }
 
@@ -84,11 +84,11 @@ button {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
+    /* color: #213547; */
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    /* color: #747bff; */
   }
   button {
     background-color: #f9f9f9;
